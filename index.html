@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QLUX BSV — Ultimate Sovereign Engine</title>
+  <style>
+    :root {
+      --bg-color: #03080e;
+      --card-bg: rgba(6, 18, 28, 0.75);
+      --card-border: #00d2ff;
+      --neon-cyan: #00f0ff;
+      --neon-blue: #0077ff;
+      --text-main: #ffffff;
+      --text-sub: #8fa8bf;
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      padding: 20px 10px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Section & Cards Base */
+    .panel {
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      border-radius: 12px;
+      padding: 28px 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .panel-center {
+      text-align: center;
+    }
+
+    .glow-header {
+      color: var(--neon-cyan);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    /* 1. Hero Section */
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.8), 0 0 25px rgba(0, 240, 255, 0.4);
+      margin: 10px 0;
+    }
+
+    .hero-subtitle {
+      font-size: 0.85rem;
+      color: #d1ecff;
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    /* 2. Hierarchy Section */
+    .hierarchy-box {
+      background: rgba(0, 30, 45, 0.8);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.15) inset;
+    }
+
+    .hierarchy-sub {
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      background: rgba(0, 15, 25, 0.6);
+      font-size: 0.75rem;
+      color: var(--text-sub);
+    }
+
+    .arrow-down {
+      color: var(--neon-cyan);
+      font-size: 1rem;
+      margin: 8px 0;
+    }
+
+    /* 3. Global Synchronization (Grid) */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .module-item {
+      background: rgba(0, 20, 35, 0.8);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 6px;
+      padding: 10px 4px;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .module-item:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+    }
+
+    .module-num {
+      font-size: 0.6rem;
+      color: var(--neon-cyan);
+      display: block;
+    }
+
+    .module-name {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* 4. Reset Impact/Effect Section */
+    .impact-effect-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+      text-align: left;
+    }
+
+    .impact-card {
+      background: rgba(0, 20, 32, 0.6);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 0.7rem;
+      color: var(--text-sub);
+    }
+
+    .impact-card strong {
+      color: var(--neon-cyan);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Split Row Layout (Text + Visual) */
+    .split-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      text-align: left;
+    }
+
+    .split-text {
+      flex: 1.2;
+    }
+
+    .split-visual {
+      flex: 0.8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 140px;
+    }
+
+    /* 5. Table Section */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.65rem;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 10px 8px;
+      border-bottom: 1px solid rgba(0, 210, 255, 0.15);
+    }
+
+    th {
+      color: var(--neon-cyan);
+      font-weight: 600;
+    }
+
+    td {
+      color: var(--text-sub);
+    }
+
+    td.highlight {
+      color: var(--neon-cyan);
+      font-weight: 600;
+    }
+
+    /* 6. Formula Box */
+    .formula-box {
+      background: rgba(0, 20, 35, 0.8);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 6px;
+      padding: 12px;
+      font-family: monospace;
+      color: #fff;
+      font-size: 0.75rem;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.1) inset;
+    }
+
+    /* 7. Nano-Reward Economy (Tabs/Cards) */
+    .reward-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .reward-card {
+      background: rgba(0, 20, 30, 0.7);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      border-radius: 8px;
+      padding: 14px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .reward-card.active {
+      border-color: #00ff88;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+    }
+
+    .reward-icon {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+      color: #00ff88;
+    }
+
+    .reward-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .reward-text {
+      font-size: 0.6rem;
+      color: var(--text-sub);
+      line-height: 1.4;
+    }
+
+    /* Visual Shapes */
+    .mesh-circle {
+      width: 110px;
+      height: 110px;
+      border: 1px dashed var(--neon-cyan);
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    }
+
+    .mesh-circle::after {
+      content: '';
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.2) 0%, transparent 70%);
+    }
+
+    .diamond-core {
+      width: 80px;
+      height: 80px;
+      border: 1px solid var(--neon-cyan);
+      transform: rotate(45deg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    .diamond-core span {
+      transform: rotate(-45deg);
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-align: center;
+    }
+
+    .pulse-rings {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pulse-rings .outer {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border: 1px dashed var(--neon-cyan);
+      border-radius: 50%;
+    }
+
+    .pulse-rings .inner {
+      width: 50px;
+      height: 50px;
+      border: 2px solid var(--neon-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+    }
+
+    .singularity-star {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.3) 0%, transparent 80%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .star-point {
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+      box-shadow: 0 0 15px #fff;
+    }
+
+    /* 8. Bottom Action & Balance Card */
+    .balance-card {
+      background: rgba(0, 15, 25, 0.9);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .balance-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+    }
+
+    .balance-label {
+      font-size: 0.65rem;
+      color: var(--neon-cyan);
+      font-weight: 700;
+    }
+
+    .balance-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .pending-label {
+      font-size: 0.55rem;
+      color: var(--text-sub);
+    }
+
+    .pending-value {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+    }
+
+    .swipe-container {
+      background: #000;
+      border: 1px solid var(--neon-cyan);
+      border-radius: 30px;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      height: 44px;
+      cursor: pointer;
+    }
+
+    .swipe-btn {
+      background: linear-gradient(90deg, #00d2ff, #0077ff);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .swipe-guide {
+      flex: 1;
+      text-align: center;
+      font-size: 0.65rem;
+      color: var(--text-sub);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- 1. Top Section -->
+    <section class="panel panel-center">
+      <div class="glow-header">ABSOLUTE BSV SOVEREIGNTY</div>
+      <h1 class="hero-title">QLUX BSV</h1>
+      <p class="hero-subtitle">The Ultimate Sovereign Engine of Infinite Economic Convergence.</p>
+      <p class="section-desc">ビットコインSV（BSV）の無限スケーラビリティを基盤とし、あらゆる既存の搾取構造を完全に無効化する、地球上最強の自律分散執行レイヤー。</p>
+    </section>
+
+    <!-- 2. The Supreme Hierarchy -->
+    <section class="panel panel-center">
+      <div class="glow-header">THE SUPREME HIERARCHY</div>
+      <div class="hierarchy-box">
+        <strong style="color: #fff; font-size: 0.85rem;">QLUX BSV: Sovereign Command Gateway</strong>
+        <p class="section-desc" style="margin-top: 4px;">すべての経済価値、契約、データ主権を絶対的かつ統約的に支配下に置く究極の最高司令塔。</p>
+      </div>
+      <div class="arrow-down">⬇</div>
+      <div class="hierarchy-sub">
+        BSV Native Global Infrastructure & Atomic Execution Tier: 遅延ゼロ・改ざん不能の超高速トランザクション網
+      </div>
+    </section>
+
+    <!-- 3. Global Synchronization -->
+    <section class="panel panel-center">
+      <div class="glow-header">GLOBAL SYNCHRONIZATION</div>
+      <p class="section-desc">地球規模の経済同時性をミリ秒単位で完全に担保する、12の完全同期コア・モジュール。</p>
+      
+      <div class="module-grid">
+        <div class="module-item"><span class="module-num">01</span><span class="module-name">MATRIX</span></div>
+        <div class="module-item"><span class="module-num">02</span><span class="module-name">SYNC</span></div>
+        <div class="module-item"><span class="module-num">03</span><span class="module-name">PULSE</span></div>
+        <div class="module-item"><span class="module-num">04</span><span class="module-name">FLOW</span></div>
+        <div class="module-item"><span class="module-num">05</span><span class="module-name">AXIOM</span></div>
+        <div class="module-item"><span class="module-num">06</span><span class="module-name">LOGIC</span></div>
+        <div class="module-item"><span class="module-num">07</span><span class="module-name">PRIME</span></div>
+        <div class="module-item"><span class="module-num">08</span><span class="module-name">OMEGA</span></div>
+        <div class="module-item"><span class="module-num">09</span><span class="module-name">VOID</span></div>
+        <div class="module-item"><span class="module-num">10</span><span class="module-name">ZEN</span></div>
+        <div class="module-item"><span class="module-num">11</span><span class="module-name">TRUE</span></div>
+        <div class="module-item"><span class="module-num">12</span><span class="module-name">CORE</span></div>
+      </div>
+    </section>
+
+    <!-- 4. The Act of Reset -->
+    <section class="panel panel-center">
+      <div class="glow-header">THE ACT OF RESET</div>
+      <h2 class="section-title">スワイプ。それは旧世界の不条理への「完全な決別」。</h2>
+      <p class="section-desc">
+        仲介者の許可や理不尽な手数料を待つ暗黒の時代は、ここで終わりを迎えます。指先でスワイプした瞬間、BSVの数学的真理に基づいた真の富が、あなたのウォレットへダイレクトに直結されます。
+      </p>
+      <div class="impact-effect-grid">
+        <div class="impact-card">
+          <strong>Impact: 依存関係の完全消滅</strong>
+          中央銀行や国家の恣意的な介入を排し、不変のプロトコルコードが直接あなたを主権者として認識します。
+        </div>
+        <div class="impact-card">
+          <strong>Effect: 絶対的自由の確定</strong>
+          タイムラグはゼロへ。未清算の可能性はすべて排除され、その場で即時利用可能な現実の購買力へと昇華されます。
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Universal Mesh -->
+    <section class="panel">
+      <div class="split-row">
+        <div class="split-text">
+          <div class="glow-header">UNIVERSAL MESH</div>
+          <h2 class="section-title">地球規模の経済再構築</h2>
+          <p class="section-desc">国境、言語、階層の壁。QLUX BSVはそれらをデータ的に無効化し、地球上のあらゆる経済活動を一つの均質な高効率網（Mesh）へと完全に収束させます。</p>
+        </div>
+        <div class="split-visual">
+          <div class="mesh-circle"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. The Absolute Comparison -->
+    <section class="panel panel-center">
+      <div class="glow-header">THE ABSOLUTE COMPARISON</div>
+      <p class="section-desc">QLUX BSVは単なる「システム改善」ではありません。人類の富の定義そのものの書き換えです。</p>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Metaphysics</th>
+              <th>Legacy Banking / Web3 Apps</th>
+              <th>QLUX BSV Sovereign Engine</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Trust Source</td>
+              <td>Human / Institutional Trust</td>
+              <td class="highlight">Mathematical Absolute Integrity (BSV)</td>
+            </tr>
+            <tr>
+              <td>Settlement Time</td>
+              <td>Pending (High Friction & Fees)</td>
+              <td class="highlight">Native Atomic & Instant (Frictionless)</td>
+            </tr>
+            <tr>
+              <td>Ownership</td>
+              <td>Custodial (Third-party Control)</td>
+              <td class="highlight">Absolute Self-Sovereignty (100% Yours)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 7. Mathematical Trust -->
+    <section class="panel">
+      <div class="split-row">
+        <div class="split-text">
+          <div class="glow-header">MATHEMATICAL TRUST</div>
+          <h2 class="section-title">契約の自動執行（Auto-Escrow）</h2>
+          <div class="formula-box">
+            P<sub>settle</sub><br>
+            Action = Verified<br>
+            Instant BSV TX
+          </div>
+          <p class="section-desc">BSVネイティブのスマートコントラクトが、物理法則のように不変の契約を自動執行。</p>
+        </div>
+        <div class="split-visual">
+          <div class="diamond-core">
+            <span>QLUX BSV<br>CORE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Auto-Nano-Reward Economy -->
+    <section class="panel panel-center">
+      <div class="glow-header">AUTO-NANO-REWARD ECONOMY</div>
+      <p class="section-desc">「生きているだけで価値が循環する」マネタイズの新次元（クリックして切替）</p>
+
+      <div class="reward-tabs">
+        <div class="reward-card active">
+          <div class="reward-icon">👁</div>
+          <div class="reward-title">Active Viewing</div>
+          <div class="reward-text">情報を視るその瞬間に、あなたの時間は微小ナノペイメントとしてリアルタイム還元。</div>
+        </div>
+        <div class="reward-card">
+          <div class="reward-icon">🗄</div>
+          <div class="reward-title">Data Sovereignty</div>
+          <div class="reward-text">日常のデータ共有の背景でマイクロ報酬が動き続け、参加者全員が自動的に豊かになる。</div>
+        </div>
+        <div class="reward-card">
+          <div class="reward-icon">📈</div>
+          <div class="reward-title">Collective Wealth</div>
+          <div class="reward-text">エコシステムへの参加深度に応じ、ネットワーク全体の価値があなたへ自動分配される。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Eternal Sanctuary -->
+    <section class="panel">
+      <div class="split-row">
+        <div class="split-text">
+          <div class="glow-header">ETERNAL SANCTUARY</div>
+          <h2 class="section-title">改ざん不能の不変性</h2>
+          <p class="section-desc">一度BSVのブロックチェーンに刻まれた真実は、宇宙の法則のように決して揺らぎません。QLUX BSVはすべての取引に「永遠」という名の絶対的セキュリティを付与します。</p>
+        </div>
+        <div class="split-visual">
+          <svg width="80" height="80" viewBox="0 0 100 100">
+            <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="#00f0ff" stroke-width="1.5" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Quantum Pulse -->
+    <section class="panel">
+      <div class="split-row">
+        <div class="split-text">
+          <div class="glow-header">QUANTUM PULSE</div>
+          <h2 class="section-title">量子同期ネットワーク</h2>
+          <p class="section-desc">地球規模の経済データをミリ秒単位で束ねる分散共鳴コア。すべてのトランザクションが絶対的なエネルギーパルスとしてBSV上で美しく同期されます。</p>
+        </div>
+        <div class="split-visual">
+          <div class="pulse-rings">
+            <div class="outer"></div>
+            <div class="inner"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. The Singularity -->
+    <section class="panel">
+      <div class="split-row">
+        <div class="split-text">
+          <div class="glow-header">THE SINGULARITY</div>
+          <h2 class="section-title">価値の集束点</h2>
+          <p class="section-desc">宇宙のすべての光が一点に集まるように、世界中の富と価値があなたの掌へと集約される。QLUX BSVは、経済の重力そのものを完全に再定義します。</p>
+        </div>
+        <div class="split-visual">
+          <div class="singularity-star">
+            <div class="star-point"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Final Step & Balance Action -->
+    <section class="panel panel-center">
+      <h2 class="section-title" style="color: #fff; font-size: 1.05rem;">最後のステップ。主権をあなたの掌へ。</h2>
+      <p class="section-desc" style="font-size: 0.72rem; line-height: 1.5; margin-bottom: 16px;">
+        中間搾取の連鎖は、ここで完全に断ち切られました。すべてのインフラ、すべてのスマートコントラクト、すべての数学的証明が今、あなたの指先に集結しています。「自分の価値を、傍観者ではなく、自分自身の見識で完全かつ絶対に確定させる」――これこそが、人類がたどり着いた究極の経済的解放です。
+      </p>
+
+      <div class="balance-card">
+        <div class="balance-row">
+          <div style="text-align: left;">
+            <div class="balance-label">SOVEREIGN ACTIVE BALANCE</div>
+            <div class="balance-value">57,450,000 SAT</div>
+          </div>
+          <div style="text-align: right;">
+            <div class="pending-label">PENDING BSV REWARDS</div>
+            <div class="pending-value">5,500,000 SAT</div>
+          </div>
+        </div>
+
+        <div class="swipe-container" onclick="handleSwipe(this)">
+          <button class="swipe-btn">SWIPE QLUX</button>
+          <span class="swipe-guide">👉 SLIDE TO TELEPORT VALUE</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    function handleSwipe(element) {
+      alert('Value teleported successfully.');
+    }
+  </script>
+</body>
+</html>
+
