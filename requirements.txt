@@ -1,4 +1,8 @@
 fastapi
 uvicorn
-pydantic
+gunicorn
 requests
+pydantic
+psutil
+websockets
+openai
