@@ -6,7 +6,9 @@ from pydantic import BaseModel
 
 app = FastAPI(title="QLUX Autonomous Self-Evolving Core")
 
-class EvolutionPayload(BaseModel.path: str, optimization_prompt: str)
+class EvolutionPayload(BaseModel):
+    path: str
+    optimization_prompt: str
 
 # 1. 収益蓄積 & 報酬プールの確認（HTTP 402 / Micro-payment連動）
 @app.post("/api/v1/omni/execute")
