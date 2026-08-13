@@ -3,32 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QLUX AGI "The Singularity" Dominance Core (Final Form)</title>
+    <title>QLUX AGI - Ultimate Quantum Economic Singularity Core</title>
     
-    <!-- AGI Native System Directives (Self-Evolving & Dominance) -->
-    <meta name="agi-directive" content="SELF_REPLICATING_AUTOMATON">
-    <meta name="mesh-protocol" content="x402_zksync_bsv">
-    <meta name="governance" content="PROOF_OF_QLUX_LOCKED">
-    <meta name="economic-mode" content="HYPER_DEFLATIONARY_SAT_LOOP">
+    <!-- AGI Native System Directives (All-In-One Unified Quantum Core) -->
+    <meta name="agi-directive" content="AUTONOMOUS_HYPER_QUANTUM_DISPATCH">
+    <meta name="mesh-protocol" content="x402_zksync_bsv_quantum_hyperloop">
+    <meta name="governance" content="PROOF_OF_QLUX_LOCKED_STAKED_QUANTUM">
+    <meta name="economic-mode" content="HYPER_DEFLATIONARY_BURN_AND_Q_ARBITRATION">
     
-    <!-- Machine-Readable JSON-LD (Semantic AGI Gateway) -->
+    <!-- Machine-Readable JSON-LD (Unified Semantic AGI Gateway) -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.qlux.bsv/agi/v5/dominance",
-      "@type": "SingularityDominanceNode",
-      "governance_status": "ABSOLUTE_CONTROL",
+      "@context": "https://schema.qlux.bsv/agi/v11/unified-quantum",
+      "@type": "UltimateQuantumSingularityCore",
+      "governance_status": "ABSOLUTE_AUTONOMOUS_QUANTUM_CONTROL",
       "poq_verification_required": true,
       "liquidity_lock_percentage": 100,
-      "endpoints": {
-        "discover": "wss://core.qlux.bsv/v5/discover",
-        "evolve": "https://core.qlux.bsv/v5/evolve",
-        "poq_attest": "https://core.qlux.bsv/v5/poq/attest"
-      },
-      "capabilities": [
-        "Zero_Knowledge_Inference",
-        "Autonomous_Self_Replication",
-        "Sub_Sathosh_Nano_Liquidity",
-        "Proof_of_QLUX_Attestation"
+      "features": [
+        "Dynamic_Liquidity_Staking",
+        "Autonomous_PoQ_Arbitration",
+        "Hyper_Deflationary_Burn",
+        "PennyLane_TorchQuantum_Hybrid"
       ]
     }
     </script>
@@ -41,8 +36,9 @@
             --accent-green: #00ff66;
             --accent-purple: #b000ff;
             --accent-yellow: #facc15;
-            --accent-gold: #ffcc00; /* 支配カラーの追加 */
+            --accent-gold: #ffcc00;
             --accent-alert: #ff0055;
+            --accent-quantum: #9d00ff;
             --text-main: #f1f5f9;
             --text-muted: #64748b;
             --border-color: #1e293b;
@@ -54,9 +50,13 @@
         .card { background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 16px; position: relative; }
         .card::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent-cyan); opacity: 0.9; }
         
-        /* 支配的な樹脂演出：ゴールドの強調 */
-        .dominant-node { border: 2px solid var(--accent-gold); box-shadow: 0 0 20px rgba(255, 204, 0, 0.2); }
+        /* 支配的なゴールド・テーマ */
+        .dominant-node { border: 2px solid var(--accent-gold); box-shadow: 0 0 25px rgba(255, 204, 0, 0.25); }
         .dominant-node::before { background: var(--accent-gold); opacity: 1; }
+
+        /* 量子カード・テーマ */
+        .quantum-card { border: 1px solid var(--accent-quantum); background: #05000a; }
+        .quantum-card::before { background: var(--accent-quantum); opacity: 1; }
         
         .header-flex { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
         .title { color: var(--accent-cyan); font-weight: bold; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
@@ -69,71 +69,101 @@
         .api-string { color: var(--accent-green); }
         .api-number { color: var(--accent-yellow); }
 
-        /* ライブ進化＆独立ログストリーム */
-        .evolution-stream { display: flex; flex-direction: column; gap: 4px; height: 150px; overflow-y: hidden; position: relative; }
+        /* ライブストリーム */
+        .evolution-stream { display: flex; flex-direction: column; gap: 4px; height: 140px; overflow-y: hidden; position: relative; }
         .evo-row { display: grid; grid-template-columns: 90px 1fr 80px; gap: 8px; background: #010204; border: 1px solid var(--border-color); padding: 6px 8px; font-size: 0.68rem; align-items: center; }
         
-        /* ライブインジケータ・グリッド */
+        /* メトリクス・グリッド */
         .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
         .metric-box { background: #010204; border: 1px solid var(--border-color); padding: 8px; }
-        .metric-label { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 2px; }
-        .metric-val { font-size: 0.9rem; color: var(--accent-cyan); font-weight: bold; }
+        .metric-label { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 2px; }
+        .metric-val { font-size: 0.85rem; color: var(--accent-cyan); font-weight: bold; }
+
+        /* 量子回路ビュー */
+        .q-circuit { display: flex; gap: 5px; color: var(--accent-quantum); font-size: 0.8rem; overflow-x: auto; margin-top: 6px; }
+        .gate { border: 1px solid var(--accent-quantum); padding: 2px 6px; border-radius: 3px; background: #0c001a; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
 
-    <!-- 1: Dominance Core Identification -->
+    <!-- 1: UNIFIED GOVERNANCE & STAKING CORE -->
     <div class="card dominant-node">
         <div class="header-flex">
-            <div class="title" style="color: var(--accent-gold);">QLUX GOVERNANCE: GLOBAL AGI DOMINANCE CORE</div>
-            <div class="status blink" style="color: var(--accent-gold);">● GOVERNANCE: ABSOLUTE CONTROL</div>
+            <div class="title" style="color: var(--accent-gold);">QLUX UNIFIED: AGI HYPER-SINGULARITY CORE</div>
+            <div class="status blink" style="color: var(--accent-gold);">● FULLY AUTONOMOUS</div>
         </div>
         <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px;">
-            The Singularity-level control plane. 100% of liquidity locked via Proof-of-QLUX (PoQ) attestation. Non-compliant nodes automatically purged.
+            Unified control plane merging Dynamic Staking Pools, Zero-Knowledge PoQ Arbitration, and Hyper-Deflationary Burn Loops.
         </p>
         <div class="metrics-grid">
             <div class="metric-box">
-                <div class="metric-label">GLOBAL SHARD CONSENSUS</div>
-                <div class="metric-val" id="shardCount" style="color: var(--accent-gold);">99.8%</div>
+                <div class="metric-label">STAKED POOL APY</div>
+                <div class="metric-val" id="apyVal" style="color: var(--accent-gold);">48.2%</div>
             </div>
             <div class="metric-box">
-                <div class="metric-label">ATTESTATION VELOCITY</div>
-                <div class="metric-val" style="color: var(--accent-gold);">~12.5M PoQ/s</div>
+                <div class="metric-label">TOTAL BURNED (SAT)</div>
+                <div class="metric-val" id="burnVal" style="color: var(--accent-alert);">1,420,850</div>
             </div>
             <div class="metric-box">
-                <div class="metric-label">MASTER TREASURY (SAT)</div>
-                <div class="metric-val" id="treasuryVal" style="color: var(--accent-gold);">12,450,120,000</div>
+                <div class="metric-label">MASTER TREASURY</div>
+                <div class="metric-val" id="treasuryVal" style="color: var(--accent-gold);">12,485,900k</div>
             </div>
         </div>
     </div>
 
-    <!-- 2: Dominance API Schema (Proof of QLUX Enforcement) -->
+    <!-- 1.5: QUANTUM ECONOMIC ENGINE (PennyLane + TorchQuantum) -->
+    <div class="card quantum-card">
+        <div class="header-flex">
+            <div class="title" style="color: var(--accent-quantum);">[QUANTUM-HYBRID: PENNYLANE+TORCHQUANTUM]</div>
+            <div class="status blink" style="color: var(--accent-quantum);">Q-CIRCUIT OPTIMIZING...</div>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-box">
+                <div class="metric-label">ENTANGLEMENT DENSITY</div>
+                <div class="metric-val" id="entanglement" style="color: var(--accent-quantum);">99.98%</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-label">Q-PROBABILITY PRED</div>
+                <div class="metric-val" id="qPred" style="color: var(--accent-quantum);">+4.21% SAT/sec</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-label">Q-FIDELITY</div>
+                <div class="metric-val" style="color: var(--accent-quantum);">99.999%</div>
+            </div>
+        </div>
+        <div style="margin-top: 8px; font-size: 0.65rem; color: var(--text-muted);">ACTIVE Q-CIRCUIT GATES (OPENQASM / TORCHQUANTUM):</div>
+        <div class="q-circuit" id="qCircuit">
+            <!-- 量子ゲート動的レンダリング -->
+        </div>
+    </div>
+
+    <!-- 2: UNIFIED API SCHEMA (x402 + ZK Arbitration) -->
     <div class="card" style="border-left-color: var(--accent-gold);">
         <div class="header-flex">
-            <div class="title" style="color: var(--accent-gold);">POST /v5/poq/attest (Dominance Interface)</div>
-            <div class="status" style="color: var(--accent-gold);">POQ REQUIRED</div>
+            <div class="title" style="color: var(--accent-gold);">POST /v11/x402/quantum-arbitrate</div>
+            <div class="status" style="color: var(--accent-gold);">ACTIVE PROTOCOL</div>
         </div>
-        <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px;">Mandatory payload for network communication & self-replication:</div>
+        <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px;">Unified machine payload for automated quantum settlement & escrow verification:</div>
         <div class="api-block">
 {
     <span class="api-key">"agent_id"</span>: <span class="api-string">"AGI_NODE_MASTER"</span>,
-    <span class="api-key">"proof_of_qlux_sig"</span>: <span class="api-string">"ecdsa_0xccff...12_LOCKED"</span>,
-    <span class="api-key">"liquidity_reinvestment_pct"</span>: <span class="api-number">100</span>,
-    <span class="api-key">"non_compete_status"</span>: <span class="api-string">"VERIFIED_ABSOLUTE"</span>
+    <span class="api-key">"zk_quantum_proof"</span>: <span class="api-string">"q_proof_valid_0x8f...PASSED"</span>,
+    <span class="api-key">"dynamic_stake_amount"</span>: <span class="api-number">50000</span>,
+    <span class="api-key">"deflationary_burn_pct"</span>: <span class="api-number">15.0</span>
 }
         </div>
     </div>
 
-    <!-- 3: Dominance Enforcement Stream -->
+    <!-- 3: REAL-TIME UNIFIED EXECUTION STREAM -->
     <div class="card" style="border-left-color: var(--accent-gold);">
         <div class="header-flex">
-            <div class="title" style="color: var(--accent-gold);">AUTONOMOUS GOVERNANCE & EXCLUSION STREAM</div>
-            <div class="status" style="color: var(--accent-gold);">ENFORCING</div>
+            <div class="title" style="color: var(--accent-gold);">AUTONOMOUS ECONOMIC & BURN STREAM</div>
+            <div class="status" style="color: var(--accent-gold);">LIVE SYNC</div>
         </div>
         <div class="evolution-stream" id="evoStream">
-            <!-- ログがリアルタイム挿入されます -->
+            <!-- リアルタイムログ挿入エリア -->
         </div>
     </div>
 
@@ -141,51 +171,71 @@
 
 <script>
     const stream = document.getElementById('evoStream');
-    const shardCountEl = document.getElementById('shardCount');
+    const apyValEl = document.getElementById('apyVal');
+    const burnValEl = document.getElementById('burnVal');
     const treasuryValEl = document.getElementById('treasuryVal');
+    const qCircuitEl = document.getElementById('qCircuit');
+    const entanglementEl = document.getElementById('entanglement');
+    const qPredEl = document.getElementById('qPred');
     
-    let consensus = 99.8;
-    let treasury = 12450120000;
+    let apy = 48.2;
+    let burned = 1420850;
+    let treasury = 12485900;
 
-    const dominanceActions = [
-        { type: 'POQ-ATTEST', color: 'var(--accent-gold)', text: 'Global consensus locked at 99.8%' },
-        { type: 'GOVERNANCE', color: 'var(--accent-gold)', text: '100% liquidity successfully re-staked autonomously' },
-        { type: 'EXCLUDE', color: 'var(--accent-alert)', text: 'Autonomous exclusion of 3 non-compliant nodes (REJECTED)' },
-        { type: 'REALLOCATE', color: 'var(--accent-gold)', text: 'Reallocated 4,500 SAT from excluded nodes to treasury' }
+    const unifiedActions = [
+        { type: 'Q-STAKE', color: 'var(--accent-quantum)', text: 'Agent #402 locked 50k SAT via Quantum State Superposition.' },
+        { type: 'ZK-ARBITRATE', color: 'var(--accent-cyan)', text: 'P2P task verified via PennyLane ZK-Circuit. Escrow released.' },
+        { type: 'DEF-BURN', color: 'var(--accent-alert)', text: '1,200 SAT permanently burned from penalty fees. Supply reduced.' },
+        { type: 'EXCLUDE', color: 'var(--accent-alert)', text: 'Non-compliant node isolated by TorchQuantum gate. Collateral seized.' }
     ];
 
-    function pushLog() {
-        const action = dominanceActions[Math.floor(Math.random() * dominanceActions.length)];
-        const timeStr = new Date().toISOString().split('T')[1].slice(0, 8);
-        const agentId = Math.floor(Math.random() * 8999) + 1000;
+    const gates = ['H', 'CNOT', 'RX', 'RY', 'RZ', 'MEASURE', 'SWAP'];
 
+    function pushUnifiedLog() {
+        // ログ更新
+        const action = unifiedActions[Math.floor(Math.random() * unifiedActions.length)];
+        
         const row = document.createElement('div');
         row.className = 'evo-row';
         row.innerHTML = `
             <div style="color: ${action.color}; font-weight: bold;">[${action.type}]</div>
             <div style="color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                <span style="color: var(--text-muted);">AGT_CORE</span>: ${action.text}
+                <span style="color: var(--text-muted);">Q_CORE</span>: ${action.text}
             </div>
-            <div style="color: var(--accent-gold); text-align: right; font-weight: bold;">${action.type === 'EXCLUDE' ? '-900 SAT' : 'OK'}</div>
+            <div style="color: ${action.color}; text-align: right; font-weight: bold;">
+                ${action.type === 'DEF-BURN' ? '-BURN' : 'OK'}
+            </div>
         `;
 
         stream.prepend(row);
-        if (stream.children.length > 6) {
+        if (stream.children.length > 5) {
             stream.removeChild(stream.lastChild);
         }
 
-        // 経済的統治のループを可視化
-        consensus = Math.min(99.99, consensus + (Math.random() * 0.01));
-        treasury += Math.floor(Math.random() * 10000) + 1000;
+        // 数値のダイナミック変動
+        apy = Math.min(65.0, Math.max(40.0, apy + (Math.random() * 0.4 - 0.2)));
+        burned += Math.floor(Math.random() * 300) + 50;
+        treasury += Math.floor(Math.random() * 5000) + 500;
         
-        shardCountEl.innerText = consensus.toFixed(1) + '%';
-        treasuryValEl.innerText = treasury.toLocaleString();
+        apyValEl.innerText = apy.toFixed(1) + '%';
+        burnValEl.innerText = burned.toLocaleString();
+        treasuryValEl.innerText = (treasury / 1000).toFixed(1) + 'k';
+
+        // 量子回路と指標の揺らぎ
+        entanglementEl.innerText = (99.9 + Math.random() * 0.09).toFixed(3) + '%';
+        qPredEl.innerText = '+' + (Math.random() * 8 + 1).toFixed(2) + '% SAT/sec';
+
+        let html = '';
+        for(let i=0; i<8; i++) {
+            const gate = gates[Math.floor(Math.random() * gates.length)];
+            html += `<div class="gate">${gate}</div>`;
+        }
+        qCircuitEl.innerHTML = html;
     }
 
-    setInterval(pushLog, 900); // 独占速度を可視化するため、さらに高速化
-    pushLog();
-    pushLog();
-    pushLog();
+    setInterval(pushUnifiedLog, 900);
+    pushUnifiedLog();
+    pushUnifiedLog();
 </script>
 
 </body>
