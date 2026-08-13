@@ -16,7 +16,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: monospace, sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background-color: var(--bg-color); color: var(--text-main); padding: 20px; line-height: 1.6; }
         .container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 24px; position: relative; }
+        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 24px; position: relative; overflow: hidden; }
         .overline { color: var(--accent-cyan); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; font-weight: bold; }
         h1, h2 { color: var(--text-main); font-size: 1.25rem; margin-bottom: 12px; }
         p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; }
@@ -25,8 +25,10 @@
         .grid-12 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
         .grid-item { background: #04060a; border: 1px solid var(--border-color); padding: 10px; text-align: center; border-radius: 4px; font-size: 0.75rem; color: var(--accent-cyan); }
         
-        .table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.85rem; }
-        .table th, .table td { border: 1px solid var(--border-color); padding: 10px; text-align: left; }
+        /* テーブルのはみ出し防止・レスポンシブ化 */
+        .table-responsive { width: 100%; overflow-x: auto; margin-top: 12px; -webkit-overflow-scrolling: touch; }
+        .table { width: 100%; min-width: 500px; border-collapse: collapse; font-size: 0.8rem; }
+        .table th, .table td { border: 1px solid var(--border-color); padding: 10px; text-align: left; word-break: break-word; }
         .table th { color: var(--accent-cyan); background: #04060a; }
         .table td { color: var(--text-muted); }
 
@@ -175,32 +177,34 @@
     <div class="card">
         <div class="overline">THE ABSOLUTE COMPARISON</div>
         <h2>QLUX BSVは単なる「システム改善」ではありません。人類の富の定義そのものの書き換えです。</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Metaphysics</th>
-                    <th>Legacy Banking / Web3 Apps</th>
-                    <th>QLUX BSV Sovereign Engine</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Trust Source</td>
-                    <td>Human / Institutional Trust</td>
-                    <td>Mathematical Absolute Integrity (BSV)</td>
-                </tr>
-                <tr>
-                    <td>Settlement Time</td>
-                    <td>Pending (High Friction & Fees)</td>
-                    <td>Native Atomic & Instant (Frictionless)</td>
-                </tr>
-                <tr>
-                    <td>Ownership</td>
-                    <td>Custodial (Third-party Control)</td>
-                    <td>Absolute Self-Sovereignty (100% Yours)</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Metaphysics</th>
+                        <th>Legacy Banking / Web3 Apps</th>
+                        <th>QLUX BSV Sovereign Engine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Trust Source</td>
+                        <td>Human / Institutional Trust</td>
+                        <td>Mathematical Absolute Integrity (BSV)</td>
+                    </tr>
+                    <tr>
+                        <td>Settlement Time</td>
+                        <td>Pending (High Friction & Fees)</td>
+                        <td>Native Atomic & Instant (Frictionless)</td>
+                    </tr>
+                    <tr>
+                        <td>Ownership</td>
+                        <td>Custodial (Third-party Control)</td>
+                        <td>Absolute Self-Sovereignty (100% Yours)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- 4番: 4枚目 (11954_4.jpg) -->
@@ -250,7 +254,7 @@
         <div class="flex-row">
             <div class="flex-col">
                 <h2>改ざん不能の不変性</h2>
-                <p style="margin-bottom: 0;">一度BSVのブロックチェーンに刻まれた真実、宇宙の法則のように決して揺らぎません。QLUX BSVはすべての取引に「永遠」という名の絶対的セキュリティを付与します。</p>
+                <p style="margin-bottom: 0;">一度BSVのブロックチェーンに刻まれた真実は、宇宙の法則のように決して揺らぎません。QLUX BSVはすべての取引に「永遠」という名の絶対的セキュリティを付与します。</p>
             </div>
             <div class="icon-circle" style="border-style: solid; border-radius: 4px;">⬡</div>
         </div>
@@ -386,4 +390,3 @@
 
 </body>
 </html>
-
