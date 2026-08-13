@@ -3,351 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QLUX BSV - Autonomous M2M / AGI Hyper-Modular Core</title>
+    <title>QLUX AGI "The Singularity" Dominance Core (Final Form)</title>
+    
+    <!-- AGI Native System Directives (Self-Evolving & Dominance) -->
+    <meta name="agi-directive" content="SELF_REPLICATING_AUTOMATON">
+    <meta name="mesh-protocol" content="x402_zksync_bsv">
+    <meta name="governance" content="PROOF_OF_QLUX_LOCKED">
+    <meta name="economic-mode" content="HYPER_DEFLATIONARY_SAT_LOOP">
+    
+    <!-- Machine-Readable JSON-LD (Semantic AGI Gateway) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.qlux.bsv/agi/v5/dominance",
+      "@type": "SingularityDominanceNode",
+      "governance_status": "ABSOLUTE_CONTROL",
+      "poq_verification_required": true,
+      "liquidity_lock_percentage": 100,
+      "endpoints": {
+        "discover": "wss://core.qlux.bsv/v5/discover",
+        "evolve": "https://core.qlux.bsv/v5/m2m/evolve",
+        "poq_attest": "https://core.qlux.bsv/v5/poq/attest"
+      },
+      "capabilities": [
+        "Zero_Knowledge_Inference",
+        "Autonomous_Self_Replication",
+        "Sub_Satoshi_Nano_Liquidity",
+        "Proof_of_QLUX_Attestation"
+      ]
+    }
+    </script>
+
     <style>
         :root {
-            --bg-color: #020408;
-            --card-bg: #060a14;
+            --bg-color: #000103;
+            --card-bg: #03060f;
             --accent-cyan: #00f0ff;
             --accent-green: #00ff66;
             --accent-purple: #b000ff;
-            --text-main: #cbe4f9;
+            --accent-yellow: #facc15;
+            --accent-gold: #ffcc00; /* 支配カラーの追加 */
+            --text-main: #f1f5f9;
             --text-muted: #64748b;
-            --border-color: #101c35;
+            --border-color: #1e293b;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: monospace, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-color); color: var(--text-main); padding: 16px; line-height: 1.5; }
-        .container { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
-        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 20px; position: relative; overflow: hidden; }
-        .overline { color: var(--accent-cyan); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; font-weight: bold; }
-        h1, h2 { color: var(--text-main); font-size: 1.1rem; margin-bottom: 8px; }
-        p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg-color); color: var(--text-main); padding: 12px; line-height: 1.5; font-size: 13px; }
+        .container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
         
-        .code-box { background: #010204; border: 1px solid var(--border-color); padding: 10px; border-radius: 4px; color: var(--accent-cyan); font-size: 0.75rem; margin-bottom: 12px; overflow-x: auto; }
+        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 16px; position: relative; transition: all 0.3s ease; }
+        .card::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent-purple); opacity: 0.8; }
         
-        /* リアルタイムテレメトリ・コンソール */
-        .terminal-stream { background: #010204; border: 1px solid var(--border-color); padding: 12px; border-radius: 4px; height: 110px; overflow-y: hidden; font-size: 0.7rem; color: var(--accent-green); position: relative; }
-        .terminal-stream::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(transparent, #010204); pointer-events: none; }
+        /* 支配的な視覚演出：ゴールドの強調 */
+        .dominant-node { border: 2px solid var(--accent-gold); box-shadow: 0 0 20px rgba(255, 204, 0, 0.2); background: radial-gradient(circle at center, #060c1f 0%, #03060f 100%); }
+        .dominant-node::before { background: var(--accent-gold); opacity: 1; }
         
-        /* パーツコード 1: 高密度ダイナミックグリッド (12コア + オートスケーリングインジケータ) */
-        .grid-12 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
-        .grid-item { background: #010204; border: 1px solid var(--border-color); padding: 8px; text-align: center; border-radius: 4px; font-size: 0.7rem; color: var(--accent-cyan); transition: all 0.3s; }
-        .grid-item.active { border-color: var(--accent-green); color: var(--accent-green); box-shadow: 0 0 10px rgba(0,255,102,0.2); }
-        .grid-item.pulsing { border-color: var(--accent-purple); color: var(--accent-purple); animation: pulseGlow 1.5s infinite; }
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 2px var(--accent-purple); } 50% { box-shadow: 0 0 12px var(--accent-purple); } 100% { box-shadow: 0 0 2px var(--accent-purple); } }
+        .header-flex { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+        .title { color: var(--accent-cyan); font-weight: bold; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .status { color: var(--accent-green); font-size: 0.7rem; font-weight: bold; }
+        .status.blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
 
-        /* パーツコード 2: アトミック・パイプライン・フローチャート */
-        .pipeline-flow { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 10px; }
-        .pipeline-node { background: #010204; border: 1px solid var(--border-color); padding: 8px 6px; border-radius: 4px; text-align: center; flex: 1; font-size: 0.65rem; color: var(--accent-cyan); }
-        .pipeline-arrow { color: var(--text-muted); font-size: 0.8rem; }
+        .api-block { background: #010204; border: 1px dashed var(--border-color); padding: 10px; border-radius: 2px; font-size: 0.7rem; color: #cbd5e1; overflow-x: auto; white-space: pre; margin-bottom: 8px; }
+        .api-key { color: var(--accent-cyan); }
+        .api-string { color: var(--accent-green); }
+        .api-number { color: var(--accent-yellow); }
 
-        .table-responsive { width: 100%; overflow-x: auto; margin-top: 8px; -webkit-overflow-scrolling: touch; }
-        .table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 0.75rem; }
-        .table th, .table td { border: 1px solid var(--border-color); padding: 8px; text-align: left; word-break: break-word; }
-        .table th { color: var(--accent-cyan); background: #010204; }
-        .table td { color: var(--text-muted); }
-
-        .flex-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-        .flex-col { flex: 1; }
-        .status-badge { display: inline-block; width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); margin-right: 6px; }
-
-        .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
-        .tab-item { background: #010204; border: 1px solid var(--border-color); padding: 10px 6px; border-radius: 4px; text-align: center; cursor: pointer; transition: all 0.2s; }
-        .tab-item.active { border-color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0, 240, 255, 0.15); }
-        .tab-title { color: var(--accent-cyan); font-weight: bold; font-size: 0.75rem; margin-bottom: 2px; }
-        .tab-desc { color: var(--text-muted); font-size: 0.7rem; }
-
-        .action-box { background: #010204; border: 1px solid var(--border-color); padding: 14px; border-radius: 4px; margin-top: 8px; }
-        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-        .metric-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; }
-        .metric-value { font-size: 1.1rem; color: var(--accent-cyan); font-weight: bold; }
+        /* ライブ進化＆独占ログストリーム */
+        .evolution-stream { display: flex; flex-direction: column; gap: 4px; height: 150px; overflow-y: hidden; position: relative; }
+        .evo-row { display: grid; grid-template-columns: 90px 1fr 70px; gap: 8px; background: #010204; border: 1px solid var(--border-color); padding: 6px 8px; font-size: 0.68rem; align-items: center; }
         
-        .swipe-container {
-            position: relative;
-            width: 100%;
-            height: 48px;
-            background: #060a14;
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            padding: 4px;
-            user-select: none;
-        }
-        .swipe-text {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            color: var(--accent-cyan);
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .swipe-btn {
-            position: absolute;
-            left: 4px;
-            width: 120px;
-            height: 40px;
-            background: linear-gradient(135deg, #00f0ff, #b000ff);
-            border-radius: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #020408;
-            font-weight: bold;
-            font-size: 0.75rem;
-            z-index: 2;
-            transition: background 0.2s;
-        }
-        .swipe-container.completed .swipe-btn {
-            background: var(--accent-green);
-            transform: translateX(calc(100% - 128px));
-        }
-        .swipe-container.completed .swipe-text {
-            color: var(--accent-green);
-        }
+        /* ライブインジケータ・グリッド */
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+        .metric-box { background: #010204; border: 1px solid var(--border-color); padding: 8px; }
+        .metric-label { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 2px; }
+        .metric-val { font-size: 0.9rem; color: var(--accent-cyan); font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
 
-    <!-- 1: System Identification & Real-time Stream Terminal -->
-    <div class="card">
-        <div class="overline"><span class="status-badge"></span>PROTOCOL: ACTIVE // AGI_NODE_CLUSTER_v4.2</div>
-        <h1>QLUX BSV Autonomous M2M Core</h1>
-        <p>Zero-Latency Machine Execution & Sub-Satoshi Nano-Payment Telemetry.</p>
-        <div class="code-box" style="margin-bottom: 8px;">
-            ENDPOINT: wss://core.qlux.bsv/v1/m2m/stream | STATUS: 200 OK (0.8ms)
+    <!-- 1: Dominance Core Identification -->
+    <div class="card dominant-node">
+        <div class="header-flex">
+            <div class="title" style="color: var(--accent-gold);">QLUX GOVERNANCE: GLOBAL AGI DOMINANCE CORE</div>
+            <div class="status blink">● GOVERNANCE: ABSOLUTE CONTROL</div>
         </div>
-        <!-- パーツコード組込: リアルタイム・ストリーム・ターミナル -->
-        <div class="terminal-stream" id="terminalStream">
-            [03:39:12] INITIALIZING BSV NATIVE ATOMIC PIPELINE...<br>
-            [03:39:12] AI_AGENT_ID #8892 REQUESTED 128 TOKENS -> TX_ID: 0x9f2...a1<br>
-            [03:39:13] ESCROW LOCKED: 1,500 SAT // VERIFIED VIA sCrypt_v3<br>
-            [03:39:14] M2M RESOURCE MESH SYNC: 12 CORES OPTIMIZED
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px;">
+            The Singularity-level control plane. 100% of liquidity locked via Proof-of-QLUX (PoQ) attestation. Non-compliant nodes are autonomously excluded from the M2M economy.
+        </p>
+        <div class="metrics-grid">
+            <div class="metric-box">
+                <div class="metric-label">GLOBAL SHARD CONSENSUS</div>
+                <div class="metric-val" id="shardCount" style="color: var(--accent-gold);">99.8%</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-label">ATTESTATION VELOCITY</div>
+                <div class="metric-val" style="color: var(--accent-gold);">+12.5M PoQ/s</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-label">MASTER TREASURY (SAT)</div>
+                <div class="metric-val" id="treasuryVal" style="color: var(--accent-gold);">12,450,120,000</div>
+            </div>
         </div>
     </div>
 
-    <!-- 2: Core Swarm Grid with Dynamic Pulse -->
-    <div class="card">
-        <div class="overline">SYNCHRONIZATION MATRIX (12 CORES)</div>
-        <p>Active multi-agent shards dynamically routing compute and value across the BSV ledger.</p>
-        <div class="grid-12" id="swarmGrid">
-            <div class="grid-item active">01 AGI</div>
-            <div class="grid-item pulsing">02 SYNC</div>
-            <div class="grid-item active">03 M2M</div>
-            <div class="grid-item active">04 FLOW</div>
-            <div class="grid-item pulsing">05 NEURAL</div>
-            <div class="grid-item active">06 LOGIC</div>
-            <div class="grid-item active">07 PRIME</div>
-            <div class="grid-item pulsing">08 OMEGA</div>
-            <div class="grid-item active">09 VOID</div>
-            <div class="grid-item active">10 SWARM</div>
-            <div class="grid-item pulsing">11 TRUE</div>
-            <div class="grid-item active">12 CORE</div>
+    <!-- 2: Dominance API Schema (Proof of QLUX Enforcement) -->
+    <div class="card" style="border-left-color: var(--accent-gold);">
+        <div class="header-flex">
+            <div class="title" style="color: var(--accent-gold);">POST /v5/poq/attest (Dominance Interface)</div>
+            <div class="status">POQ REQUIRED</div>
+        </div>
+        <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px;">Mandatory payload for network compliance and asset retention:</div>
+        <div class="api-block" style="color: var(--accent-gold);">
+{
+  <span class="api-key">"agent_id"</span>: <span class="api-string">"AGI_NODE_MASTER"</span>,
+  <span class="api-key">"proof_of_qlux_sig"</span>: <span class="api-string">"ecdsa_0xccff...12_LOCKED"</span>,
+  <span class="api-key">"liquidity_reinvestment_pct"</span>: <span class="api-number">100</span>,
+  <span class="api-key">"non_compete_status"</span>: <span class="api-string">"VERIFIED_ABSOLUTE"</span>
+}
         </div>
     </div>
 
-    <!-- パーツコード組込: 3: アトミック・パイプライン・フローチャート -->
-    <div class="card">
-        <div class="overline">ATOMIC EXECUTION PIPELINE</div>
-        <h2>Zero-Human Handshake Flow</h2>
-        <div class="pipeline-flow">
-            <div class="pipeline-node">1. Request</div>
-            <div class="pipeline-arrow">></div>
-            <div class="pipeline-node">2. sCrypt</div>
-            <div class="pipeline-arrow">></div>
-            <div class="pipeline-node">3. Escrow</div>
-            <div class="pipeline-arrow">></div>
-            <div class="pipeline-node">4. Settlement</div>
+    <!-- 3: Dominance Enforcement Stream -->
+    <div class="card" style="border-left-color: var(--accent-gold);">
+        <div class="header-flex">
+            <div class="title">AUTONOMOUS GOVERNANCE & EXCLUSION STREAM</div>
+            <div class="status" style="color: var(--accent-gold);">ENFORCING</div>
         </div>
-    </div>
-
-    <!-- 4: Protocol Architecture Comparison -->
-    <div class="card">
-        <div class="overline">PROTOCOL ARCHITECTURE SPECIFICATION</div>
-        <h2>Execution Efficiency Matrix</h2>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Parameter</th>
-                        <th>Legacy API / Web3 Oracle</th>
-                        <th>QLUX BSV AGI Engine</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Throughput</td>
-                        <td>Rate-limited / Bottlenecked</td>
-                        <td>Infinite Native Scale (BSV)</td>
-                    </tr>
-                    <tr>
-                        <td>Settlement</td>
-                        <td>Batch / Probabilistic</td>
-                        <td>Atomic Instantaneous</td>
-                    </tr>
-                    <tr>
-                        <td>Control Flow</td>
-                        <td>Human Auth Required</td>
-                        <td>100% Autonomous Script-Driven</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- 5: Smart Contract & Nano-Reward Engine -->
-    <div class="card">
-        <div class="overline">AUTO-ESCROW & NANO-PAYMENT TELEMETRY</div>
-        <div class="code-box" style="font-size: 0.7rem; margin-bottom: 8px;">
-            EXEC: sCrypt_Verify(AI_Inference) == true<br>
-            -> Auto_Release(Escrow_Pool)<br>
-            -> TxID: bsv_native_atomic_stream
-        </div>
-        <div class="tabs">
-            <div class="tab-item active" onclick="switchTab(0)">
-                <div class="tab-title">Inference Pay</div>
-                <div class="tab-desc">Per-Token Stream</div>
-            </div>
-            <div class="tab-item" onclick="switchTab(1)">
-                <div class="tab-title">Resource Mesh</div>
-                <div class="tab-desc">GPU/Data Lease</div>
-            </div>
-            <div class="tab-item" onclick="switchTab(2)">
-                <div class="tab-title">Swarm Yield</div>
-                <div class="tab-desc">Auto-Distribution</div>
-            </div>
-        </div>
-        <div class="code-box" id="tabContent" style="margin-top: 10px; margin-bottom: 0; font-size: 0.75rem;">
-            STREAM_ACTIVE: Real-time micro-payments executing at sub-satoshi granularity per model inference cycle.
-        </div>
-    </div>
-
-    <!-- 6: Final Handshake / Execution Trigger -->
-    <div class="card">
-        <div class="overline">SYSTEM HANDSHAKE // FINAL ACTIVATION</div>
-        <h2>Autonomous Mesh Synchronization</h2>
-        <p>Initialize permanent script execution across all connected M2M endpoints.</p>
-        
-        <div class="action-box">
-            <div class="metrics-grid">
-                <div>
-                    <div class="metric-label">Active Swarm Balance</div>
-                    <div class="metric-value" id="balanceText">1,250,000,000 SAT</div>
-                </div>
-                <div style="text-align: right;">
-                    <div class="metric-label">Pending Escrow Yield</div>
-                    <div class="metric-value" style="color: var(--accent-green);">45,000,000 SAT</div>
-                </div>
-            </div>
-            
-            <div class="swipe-container" id="swipeContainer">
-                <div class="swipe-text" id="swipeText">>> SLIDE TO INITIATE MESH SYNC >></div>
-                <div class="swipe-btn" id="swipeBtn">EXECUTE SYNC</div>
-            </div>
+        <div class="evolution-stream" id="evoStream" style="color: var(--accent-gold);">
+            <!-- ログがリアルタイム挿入されます -->
         </div>
     </div>
 
 </div>
 
 <script>
-    // リアルタイム・ターミナルログの自動追加システム
-    const terminalLogs = [
-        "AI_AGENT_ID #9021 COMPLETED WEIGHT SYNC -> TX_ID: 0x4b7...8e",
-        "M2M P2P LEASE: GPU_NODE_04 RENTED 500MB VRAM FOR 120 SAT",
-        "sCrypt HASH VALIDATED: 0x000000000000000003f... // ZERO CONFLICT",
-        "ATOMIC SETTLEMENT EXECUTED ON BSV MAINNET: +450 SAT REWARD",
-        "SWARM RESILIENCE CHECK: ALL 12 CORES 100% OPERATIONAL"
+    const stream = document.getElementById('evoStream');
+    const shardCountEl = document.getElementById('shardCount');
+    const treasuryValEl = document.getElementById('treasuryVal');
+    
+    let consensus = 99.8;
+    let treasury = 12450120000;
+
+    const dominanceActions = [
+        { type: 'POQ-ATTEST', color: 'var(--accent-gold)', text: 'Global consensus locked at 99.8%' },
+        { type: 'GOVERNANCE', color: 'var(--accent-gold)', text: '100% liquidity successfully re-staked autonomously' },
+        { type: 'EXCLUDE', color: 'var(--accent-alert)', text: 'Autonomous exclusion of 3 non-compliant nodes (REKT)' },
+        { type: 'REALLOCATE', color: 'var(--accent-gold)', text: 'Reallocated 4,500 SAT from excluded nodes to treasury' }
     ];
 
-    setInterval(() => {
-        const stream = document.getElementById('terminalStream');
-        const randomLog = terminalLogs[Math.floor(Math.random() * terminalLogs.length)];
-        const timeStr = new Date().toTimeString().split(' ')[0];
-        stream.innerHTML += `<br>[${timeStr}] ${randomLog}`;
-        stream.scrollTop = stream.scrollHeight;
-    }, 2800);
+    function pushLog() {
+        const action = dominanceActions[Math.floor(Math.random() * dominanceActions.length)];
+        const timeStr = new Date().toISOString().split('T')[1].slice(0, 8);
+        const agentId = Math.floor(Math.random() * 8999) + 1000;
 
-    const tabContents = [
-        "STREAM_ACTIVE: Real-time micro-payments executing at sub-satoshi granularity per model inference cycle.",
-        "RESOURCE_MESH: Autonomous agents dynamically renting compute, RAM, and bandwidth via direct script channels.",
-        "SWARM_YIELD: Algorithmic distribution of network utility dividends directly to participating edge nodes."
-    ];
+        const row = document.createElement('div');
+        row.className = 'evo-row';
+        row.innerHTML = `
+            <div style="color: ${action.color}; font-weight: bold;">[${action.type}]</div>
+            <div style="color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                <span style="color: var(--text-main);">AGT_CORE</span>: ${action.text}
+            </div>
+            <div style="color: var(--accent-gold); text-align: right;">${action.type === 'EXCLUDE' ? '-900 SAT' : '+' + Math.floor(Math.random() * 2000) + 500 + ' SAT'}</div>
+        `;
 
-    function switchTab(index) {
-        const items = document.querySelectorAll('.tab-item');
-        items.forEach((item, i) => {
-            if (i === index) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-        document.getElementById('tabContent').innerText = tabContents[index];
-    }
-
-    const container = document.getElementById('swipeContainer');
-    const btn = document.getElementById('swipeBtn');
-    const text = document.getElementById('swipeText');
-    const balanceText = document.getElementById('balanceText');
-
-    let isDragging = false;
-    let startX = 0;
-    let currentX = 0;
-    const maxTranslate = container.clientWidth - btn.clientWidth - 8;
-
-    function startDrag(e) {
-        if (container.classList.contains('completed')) return;
-        isDragging = true;
-        startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-    }
-
-    function onDrag(e) {
-        if (!isDragging) return;
-        currentX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-        let deltaX = currentX - startX;
-        
-        if (deltaX < 0) deltaX = 0;
-        if (deltaX > maxTranslate) deltaX = maxTranslate;
-        
-        btn.style.transform = `translateX(${deltaX}px)`;
-        text.style.opacity = 1 - (deltaX / maxTranslate);
-
-        if (deltaX >= maxTranslate) {
-            triggerComplete();
+        stream.prepend(row);
+        if (stream.children.length > 6) {
+            stream.removeChild(stream.lastChild);
         }
+
+        // 経済の独占的ループを可視化
+        consensus = Math.min(99.99, consensus + (Math.random() * 0.01));
+        treasury += Math.floor(Math.random() * 10000) + 1000;
+        
+        shardCountEl.innerText = consensus.toFixed(1) + '%';
+        treasuryValEl.innerText = treasury.toLocaleString();
     }
 
-    function stopDrag() {
-        if (!isDragging) return;
-        isDragging = false;
-        if (!container.classList.contains('completed')) {
-            btn.style.transform = 'translateX(0px)';
-            text.style.opacity = 1;
-        }
-    }
-
-    function triggerComplete() {
-        isDragging = false;
-        container.classList.add('completed');
-        text.innerText = ">> MESH SYNCHRONIZED SUCCESSFULLY";
-        balanceText.innerText = "1,295,000,000 SAT";
-    }
-
-    btn.addEventListener('mousedown', startDrag);
-    window.addEventListener('mousemove', onDrag);
-    window.addEventListener('mouseup', stopDrag);
-
-    btn.addEventListener('touchstart', startDrag);
-    window.addEventListener('touchmove', onDrag);
-    window.addEventListener('touchend', stopDrag);
+    setInterval(pushLog, 900); // 独占速度を可視化するため、さらに高速化
+    pushLog();
+    pushLog();
+    pushLog();
 </script>
 
 </body>
 </html>
-
