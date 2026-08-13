@@ -246,3 +246,7 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 
+async def start_nexus_loop():
+    # ここに常駐させたいメインの処理ループを記述
+    while True:
+        await asyncio.sleep(1)
