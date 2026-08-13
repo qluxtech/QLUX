@@ -6,6 +6,14 @@ from pydantic import BaseModel
 
 app = FastAPI(title="QLUX Autonomous Self-Evolving Core")
 
+@app.get("/")
+async def root():
+    return {
+        "system": "QLUX Autonomous Self-Evolving Core",
+        "status": "online",
+        "docs": "/docs"
+    }
+
 class EvolutionPayload(BaseModel):
     path: str
     optimization_prompt: str
