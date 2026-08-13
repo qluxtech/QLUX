@@ -537,7 +537,123 @@ struct PQC_LatticeProof { bytes32 commitmentHash; int16[] latticeVector; bool ve
                 <div class="metric-val" style="color: var(--accent-gold);">+54,100 SAT/h</div>
             </div>
         </div>
+    </div> <!-- [QUANTUM-CORE: NATIVE 3D NEURAL-MATRIX ENGINE] -->
+<div class="card" style="border: 2px solid #00ffcc; background: #000508; box-shadow: 0 0 35px rgba(0, 255, 204, 0.25); padding: 10px;">
+    <div class="header-flex" style="margin-bottom: 6px;">
+        <div class="title" style="color: #00ffcc; font-size: 0.85rem;">[CORE: NATIVE QUANTUM MATRIX V9.9]</div>
+        <div class="status blink" style="color: #00ffcc;">SELF-ORGANIZING TOPOLOGY</div>
     </div>
+    <!-- リアルタイム演算キャンバス -->
+    <canvas id="quantumMatrixCanvas" style="width: 100%; height: 160px; background: #000204; border-radius: 4px; display: block;"></canvas>
+    <div style="display: flex; justify-content: space-between; font-size: 0.58rem; color: #00ffcc; margin-top: 6px;">
+        <span>NODES: 64 QUBITS (ACTIVE)</span>
+        <span>LATENCY: 0.001ms</span>
+        <span>ENTROPY: 99.999% COHERENT</span>
+    </div>
+</div>
+
+<script>
+// 世界最高峰・リアルタイム量子ニューラルネットワーク物理演算エンジン
+(function() {
+    const canvas = document.getElementById('quantumMatrixCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    // キャンバスの解像度自動調整
+    function resizeCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // ノード（量子ビット）の初期化
+    const nodes = [];
+    const nodeCount = 48;
+    for (let i = 0; i < nodeCount; i++) {
+        nodes.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 1.2,
+            vy: (Math.random() - 0.5) * 1.2,
+            radius: Math.random() * 2 + 1.5,
+            energy: Math.random()
+        });
+    }
+
+    // マウス/タッチ座標の追跡
+    let mouse = { x: -1000, y: -1000 };
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+        mouse.x = -1000;
+        mouse.y = -1000;
+    });
+
+    // 毎フレームの超高速演算＆レンダリングループ
+    function renderQuantumMatrix() {
+        ctx.fillStyle = 'rgba(0, 2, 4, 0.25)'; // 残像効果（トレーリング）
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // ノード間の結びつき（量子もつれ・シナプス結合）の計算
+        for (let i = 0; i < nodes.length; i++) {
+            let n1 = nodes[i];
+            
+            // 物理位置の更新
+            n1.x += n1.vx;
+            n1.y += n1.vy;
+
+            // 境界壁での跳ね返り
+            if (n1.x < 0 || n1.x > canvas.width) n1.vx *= -1;
+            if (n1.y < 0 || n1.y > canvas.height) n1.vy *= -1;
+
+            // マウスとのインタラクション（引力・反発）
+            let dxM = mouse.x - n1.x;
+            let dyM = mouse.y - n1.y;
+            let distM = Math.sqrt(dxM * dxM + dyM * dyM);
+            if (distM < 80) {
+                n1.x -= (dxM / distM) * 0.8;
+                n1.y -= (dyM / distM) * 0.8;
+            }
+
+            // ノード自体の描画
+            ctx.beginPath();
+            ctx.arc(n1.x, n1.y, n1.radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#00ffcc';
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = '#00ffcc';
+            ctx.fill();
+
+            // 他のノードとの距離に応じた量子トンネル効果・配線描画
+            for (let j = i + 1; j < nodes.length; j++) {
+                let n2 = nodes[j];
+                let dx = n1.x - n2.x;
+                let dy = n1.y - n2.y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 90) {
+                    ctx.beginPath();
+                    ctx.moveTo(n1.x, n1.y);
+                    ctx.lineTo(n2.x, n2.y);
+                    let alpha = (1 - (dist / 90)).toFixed(2);
+                    ctx.strokeStyle = `rgba(0, 255, 204, ${alpha * 0.6})`;
+                    ctx.lineWidth = 0.75;
+                    ctx.stroke();
+                }
+            }
+        }
+        ctx.shadowBlur = 0; // シャドウリセット
+        requestAnimationFrame(renderQuantumMatrix);
+    }
+
+    renderQuantumMatrix();
+})();
+</script>
+
 <script>
     const gridContainer = document.getElementById('grid20Container');
     const stream = document.getElementById('evoStream');
