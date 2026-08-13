@@ -44,7 +44,7 @@
         .tab-title { color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem; margin-bottom: 4px; }
         .tab-desc { color: var(--text-muted); font-size: 0.75rem; }
 
-        /* スワイプ・スライダーコンポーネント用スタイル */
+        /* スワイプコンポーネント用スタイル */
         .action-box { background: #04060a; border: 1px solid var(--border-color); padding: 16px; border-radius: 6px; text-align: center; margin-top: 12px; }
         .balance-container { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
         .balance { font-size: 1.5rem; color: var(--accent-cyan); font-weight: bold; }
@@ -103,7 +103,7 @@
 
 <div class="container">
 
-    <!-- 1. Absolute Sovereign -->
+    <!-- 1番: 1枚目 (11951_4.jpg) -->
     <div class="card" style="text-align: center;">
         <div class="overline">ABSOLUTE SOVEREIGN</div>
         <h1 style="font-size: 2rem; color: var(--accent-cyan); text-shadow: 0 0 20px rgba(0,240,255,0.4); margin: 12px 0;">QLUX</h1>
@@ -111,7 +111,6 @@
         <p>ビットコインSV（BSV）の無限スケーラビリティを基盤とし、あらゆる既存の搾取構造を完全に無効化する、地球上最強の自律分散執行レイヤー。</p>
     </div>
 
-    <!-- 2. The Supreme Hierarchy -->
     <div class="card">
         <div class="overline">THE SUPREME HIERARCHY</div>
         <div style="background: #04060a; border: 1px solid var(--accent-cyan); padding: 16px; border-radius: 6px; text-align: center; margin-bottom: 12px; box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);">
@@ -124,97 +123,7 @@
         </div>
     </div>
 
-    <!-- 3. Eternal Sanctuary -->
-    <div class="card">
-        <div class="overline">ETERNAL SANCTUARY</div>
-        <div class="flex-row">
-            <div class="flex-col">
-                <h2>改ざん不能の不変性</h2>
-                <p style="margin-bottom: 0;">一度BSVのブロックチェーンに刻まれた真実は、宇宙の法則のように決して揺らぎません。QLUX BSVはすべての取引に「永遠」という名の絶対的セキュリティを付与します。</p>
-            </div>
-            <div class="icon-circle" style="border-style: solid;">⬡</div>
-        </div>
-    </div>
-
-    <!-- 4. Quantum Pulse -->
-    <div class="card">
-        <div class="overline">QUANTUM PULSE</div>
-        <div class="flex-row">
-            <div class="flex-col">
-                <h2>量子同期ネットワーク</h2>
-                <p style="margin-bottom: 0;">地球規模の経済データをミリ秒単位で束ねる分散共鳴コア。すべてのトランザクションが絶対的なエネルギーパルスとしてBSV上で美しく同期されます。</p>
-            </div>
-            <div class="icon-circle">◎</div>
-        </div>
-    </div>
-
-    <!-- 5. The Singularity -->
-    <div class="card">
-        <div class="overline">THE SINGULARITY</div>
-        <div class="flex-row">
-            <div class="flex-col">
-                <h2>価値の集束点</h2>
-                <p style="margin-bottom: 0;">宇宙のすべての光が一点に集まるように、世界中の富と価値があなたの掌へと集約される。QLUX BSVは、経済の重力そのものを完全に再定義します。</p>
-            </div>
-            <div class="icon-circle">✦</div>
-        </div>
-    </div>
-
-    <!-- 6. Mathematical Trust -->
-    <div class="card">
-        <div class="overline">MATHEMATICAL TRUST</div>
-        <div class="flex-row">
-            <div class="flex-col">
-                <h2>契約の自動執行 (Auto-Escrow)</h2>
-                <div class="code-box" style="font-size: 0.75rem; margin-bottom: 10px;">
-                    P_settle<br>
-                    Action = Verified<br>
-                    Instant BSV TX
-                </div>
-                <p style="margin-bottom: 0;">BSVネイティブのスマートコントラクトが、物理法則のように不変の契約を自動執行。</p>
-            </div>
-            <div class="icon-circle" style="border-radius: 4px; transform: rotate(45deg); display: flex; align-items: center; justify-content: center;">
-                <span style="transform: rotate(-45deg); font-size: 0.7rem; text-align: center; color: var(--accent-cyan);">QLUX BSV<br>CORE</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 7. Auto-Nano-Reward Economy -->
-    <div class="card">
-        <div class="overline">AUTO-NANO-REWARD ECONOMY</div>
-        <p style="margin-bottom: 8px;">「生きているだけで価値が循環する」マネタイズの新次元（クリックして切替）</p>
-        <div class="tabs">
-            <div class="tab-item active" onclick="switchTab(0)">
-                <div class="tab-title">Active Viewing</div>
-                <div class="tab-desc">視る瞬間に還元</div>
-            </div>
-            <div class="tab-item" onclick="switchTab(1)">
-                <div class="tab-title">Data Sovereignty</div>
-                <div class="tab-desc">バックグラウンド報酬</div>
-            </div>
-            <div class="tab-item" onclick="switchTab(2)">
-                <div class="tab-title">Collective Wealth</div>
-                <div class="tab-desc">ネットワーク全体分配</div>
-            </div>
-        </div>
-        <div class="sub-card" id="tabContent" style="margin-top: 12px; font-size: 0.85rem;">
-            情報を視るその瞬間に、あなたの時間は微小ナノペイメントとしてリアルタイム還元。
-        </div>
-    </div>
-
-    <!-- 8. Universal Mesh -->
-    <div class="card">
-        <div class="overline">UNIVERSAL MESH</div>
-        <div class="flex-row">
-            <div class="flex-col">
-                <h2>地球規模の経済再構築</h2>
-                <p style="margin-bottom: 0;">国境、言語、階層の壁。QLUX BSVはそれらをデータ的に無効化し、地球上のあらゆる経済活動を一つの均質な高効率網（Mesh）へと完全に収束させます。</p>
-            </div>
-            <div class="icon-circle">🌐</div>
-        </div>
-    </div>
-
-    <!-- 9. Global Synchronization -->
+    <!-- 2番: 2枚目 (11952_4.jpg) -->
     <div class="card">
         <div class="overline">GLOBAL SYNCHRONIZATION</div>
         <p style="margin-bottom: 12px;">地球規模の経済同時性をミリ秒単位で完全担保する、12の完全同期コア・モジュール。</p>
@@ -234,7 +143,6 @@
         </div>
     </div>
 
-    <!-- 10. The Act of Reset & Interactive Swipe -->
     <div class="card">
         <div class="overline">THE ACT OF RESET</div>
         <h2>スワイプ。それは旧世界的不条理への「完全な決別」。</h2>
@@ -250,28 +158,20 @@
                 <p style="font-size: 0.8rem; margin-bottom: 0;">タイムラグはゼロへ。未清算の可能性はすべて排除され、その場で即時利用可能な現実の購買力へと昇華されます。</p>
             </div>
         </div>
+    </div>
 
-        <div class="action-box" style="margin-top: 16px;">
-            <div class="balance-container">
-                <div>
-                    <div class="overline" style="text-align: left; margin-bottom: 2px;">SOVEREIGN ACTIVE BALANCE</div>
-                    <div class="balance" id="balanceText">57,450,000 SAT</div>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 0.7rem; color: var(--text-muted);">PENDING BSV REWARDS</div>
-                    <div class="pending-balance">5,500,000 SAT</div>
-                </div>
+    <!-- 3番: 3枚目 (11953_4.jpg) -->
+    <div class="card">
+        <div class="overline">UNIVERSAL MESH</div>
+        <div class="flex-row">
+            <div class="flex-col">
+                <h2>地球規模の経済再構築</h2>
+                <p style="margin-bottom: 0;">国境、言語、階層の壁。QLUX BSVはそれらをデータ的に無効化し、地球上のあらゆる経済活動を一つの均質な高効率網（Mesh）へと完全に収束させます。</p>
             </div>
-            
-            <!-- スワイプして送金・確定するインタラクティブUI -->
-            <div class="swipe-container" id="swipeContainer">
-                <div class="swipe-text" id="swipeText">👉 SLIDE TO TELEPORT VALUE</div>
-                <div class="swipe-btn" id="swipeBtn">SWIPE QLUX</div>
-            </div>
+            <div class="icon-circle">🌐</div>
         </div>
     </div>
 
-    <!-- 11. The Absolute Comparison -->
     <div class="card">
         <div class="overline">THE ABSOLUTE COMPARISON</div>
         <h2>QLUX BSVは単なる「システム改善」ではありません。人類の富の定義そのものの書き換えです。</h2>
@@ -303,11 +203,104 @@
         </table>
     </div>
 
-    <!-- 12. Final Closing Card -->
+    <!-- 4番: 4枚目 (11954_4.jpg) -->
+    <div class="card">
+        <div class="overline">MATHEMATICAL TRUST</div>
+        <div class="flex-row">
+            <div class="flex-col">
+                <h2>契約の自動執行 (Auto-Escrow)</h2>
+                <div class="code-box" style="font-size: 0.75rem; margin-bottom: 10px;">
+                    P_settle<br>
+                    Action = Verified<br>
+                    Instant BSV TX
+                </div>
+                <p style="margin-bottom: 0;">BSVネイティブのスマートコントラクトが、物理法則のように不変の契約を自動執行。</p>
+            </div>
+            <div class="icon-circle" style="border-radius: 4px; transform: rotate(45deg); display: flex; align-items: center; justify-content: center;">
+                <span style="transform: rotate(-45deg); font-size: 0.7rem; text-align: center; color: var(--accent-cyan);">QLUX BSV<br>CORE</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="overline">AUTO-NANO-REWARD ECONOMY</div>
+        <p style="margin-bottom: 8px;">「生きているだけで価値が循環する」マネタイズの新次元（クリックして切替）</p>
+        <div class="tabs">
+            <div class="tab-item active" onclick="switchTab(0)">
+                <div class="tab-title">Active Viewing</div>
+                <div class="tab-desc">視る瞬間に還元</div>
+            </div>
+            <div class="tab-item" onclick="switchTab(1)">
+                <div class="tab-title">Data Sovereignty</div>
+                <div class="tab-desc">バックグラウンド報酬</div>
+            </div>
+            <div class="tab-item" onclick="switchTab(2)">
+                <div class="tab-title">Collective Wealth</div>
+                <div class="tab-desc">ネットワーク全体分配</div>
+            </div>
+        </div>
+        <div class="sub-card" id="tabContent" style="margin-top: 12px; font-size: 0.85rem;">
+            情報を視るその瞬間に、あなたの時間は微小ナノペイメントとしてリアルタイム還元。
+        </div>
+    </div>
+
+    <!-- 5番: 5枚目 (11955_4.jpg) -->
+    <div class="card">
+        <div class="overline">ETERNAL SANCTUARY</div>
+        <div class="flex-row">
+            <div class="flex-col">
+                <h2>改ざん不能の不変性</h2>
+                <p style="margin-bottom: 0;">一度BSVのブロックチェーンに刻まれた真実、宇宙の法則のように決して揺らぎません。QLUX BSVはすべての取引に「永遠」という名の絶対的セキュリティを付与します。</p>
+            </div>
+            <div class="icon-circle" style="border-style: solid; border-radius: 4px;">⬡</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="overline">QUANTUM PULSE</div>
+        <div class="flex-row">
+            <div class="flex-col">
+                <h2>量子同期ネットワーク</h2>
+                <p style="margin-bottom: 0;">地球規模の経済データをミリ秒単位で束ねる分散共鳴コア。すべてのトランザクションが絶対的なエネルギーパルスとしてBSV上で美しく同期されます。</p>
+            </div>
+            <div class="icon-circle">◎</div>
+        </div>
+    </div>
+
+    <!-- 6番: 6枚目 (11956_4.jpg) -->
+    <div class="card">
+        <div class="overline">THE SINGULARITY</div>
+        <div class="flex-row">
+            <div class="flex-col">
+                <h2>価値の集束点</h2>
+                <p style="margin-bottom: 0;">宇宙のすべての光が一点に集まるように、世界中の富と価値があなたの掌へと集約される。QLUX BSVは、経済の重力そのものを完全に再定義します。</p>
+            </div>
+            <div class="icon-circle">✦</div>
+        </div>
+    </div>
+
     <div class="card">
         <div class="overline">THE FINAL STEP</div>
         <h2>最後のステップ。主権をあなたの掌へ。</h2>
-        <p style="margin-bottom: 0;">中間搾取の連鎖は、ここで完全に断ち切られました。すべてのインフラ、すべてのスマートコントラクト、すべての数学的証明が今、あなたの指先に集結しています。「自分の価値を、傍観者ではなく、自分自身の見識で完全かつ絶対に確定させる」――これこそが、人類がたどり着いた究極の経済的解放です。</p>
+        <p>中間搾取の連鎖は、ここで完全に断ち切られました。すべてのインフラ、すべてのスマートコントラクト、すべての数学的証明が今、あなたの指先に集結しています。「自分の価値を、傍観者ではなく、自分自身の見識で完全かつ絶対に確定させる」――これこそが、人類がたどり着いた究極の経済的解放です。</p>
+        
+        <div class="action-box">
+            <div class="balance-container">
+                <div>
+                    <div class="overline" style="text-align: left; margin-bottom: 2px;">SOVEREIGN ACTIVE BALANCE</div>
+                    <div class="balance" id="balanceText">57,450,000 SAT</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">PENDING BSV REWARDS</div>
+                    <div class="pending-balance">5,500,000 SAT</div>
+                </div>
+            </div>
+            
+            <div class="swipe-container" id="swipeContainer">
+                <div class="swipe-text" id="swipeText">👉 SLIDE TO TELEPORT VALUE</div>
+                <div class="swipe-btn" id="swipeBtn">SWIPE QLUX</div>
+            </div>
+        </div>
     </div>
 
 </div>
