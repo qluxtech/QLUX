@@ -18,19 +18,13 @@ async def startup_event():
 async def root():
     return FileResponse("portal.html")
 
-    
-    @app.get("/portal.html")
+@app.get("/portal.html")
 async def get_portal():
     return FileResponse("portal.html")
 
 @app.get("/index.html")
 async def get_dashboard():
     return FileResponse("index.html")
-
-
-class EvolutionPayload(BaseModel):
-    path: str
-    optimization_prompt: str
 
 # 1. 収益蓄積 & 報酬プールの確認（HTTP 402 / Micro-payment連動）
 @app.post("/api/v1/omni/execute")
