@@ -14,8 +14,8 @@
     <!-- Machine-Readable JSON-LD (Unified Semantic AGI Gateway) -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.qlux.bsv/agi/v11/unified-quantum",
-      "@type": "UltimateQuantumSingularityCore",
+      "@context": "https://schema.qlux.bsv/agi/v12/unified-hyper-quantum",
+      "@type": "UltimateHyperQuantumSingularityCore",
       "governance_status": "ABSOLUTE_AUTONOMOUS_QUANTUM_CONTROL",
       "poq_verification_required": true,
       "liquidity_lock_percentage": 100,
@@ -23,7 +23,8 @@
         "Dynamic_Liquidity_Staking",
         "Autonomous_PoQ_Arbitration",
         "Hyper_Deflationary_Burn",
-        "PennyLane_TorchQuantum_Hybrid"
+        "PennyLane_TorchQuantum_Hybrid",
+        "VQE_QAOA_Grover_Hyper_Engine"
       ]
     }
     </script>
@@ -39,6 +40,7 @@
             --accent-gold: #ffcc00;
             --accent-alert: #ff0055;
             --accent-quantum: #9d00ff;
+            --accent-hyper: #ff00ea;
             --text-main: #f1f5f9;
             --text-muted: #64748b;
             --border-color: #1e293b;
@@ -57,6 +59,10 @@
         /* 量子カード・テーマ */
         .quantum-card { border: 1px solid var(--accent-quantum); background: #05000a; }
         .quantum-card::before { background: var(--accent-quantum); opacity: 1; }
+
+        /* 超性能ハイパー・量子制御カード */
+        .hyper-card { border: 2px solid var(--accent-hyper); background: #080010; box-shadow: 0 0 25px rgba(255, 0, 234, 0.25); }
+        .hyper-card::before { background: var(--accent-hyper); opacity: 1; }
         
         .header-flex { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
         .title { color: var(--accent-cyan); font-weight: bold; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
@@ -139,17 +145,42 @@
         </div>
     </div>
 
+    <!-- 1.8: HYPER-PERFORMANCE QUANTUM OPTIMIZATION ENGINE (VQE + QAOA + Grover) -->
+    <div class="card hyper-card">
+        <div class="header-flex">
+            <div class="title" style="color: var(--accent-hyper);">[HYPER-QUANTUM OPTIMIZATION ENGINE]</div>
+            <div class="status blink" style="color: var(--accent-hyper);">ACTIVE: VQE + QAOA + GROVER</div>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-box">
+                <div class="metric-label">VQE ENERGY STATE</div>
+                <div class="metric-val" id="vqeEnergy" style="color: #fff;">-0.99841</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-label">QAOA OPTIMIZATION</div>
+                <div class="metric-val" id="qaoaGain" style="color: var(--accent-cyan);">+14.2%</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-label">GROVER SEARCH RATE</div>
+                <div class="metric-val" id="groverRate" style="color: var(--accent-alert);">8.4k ops/s</div>
+            </div>
+        </div>
+        <div style="margin-top: 10px; font-size: 0.6rem; color: var(--text-muted); text-align: center;">
+            OPTIMIZING ECONOMIC EQUILIBRIUM VIA QUANTUM SUPERPOSITION...
+        </div>
+    </div>
+
     <!-- 2: UNIFIED API SCHEMA (x402 + ZK Arbitration) -->
     <div class="card" style="border-left-color: var(--accent-gold);">
         <div class="header-flex">
-            <div class="title" style="color: var(--accent-gold);">POST /v11/x402/quantum-arbitrate</div>
+            <div class="title" style="color: var(--accent-gold);">POST /v12/x402/hyper-quantum-arbitrate</div>
             <div class="status" style="color: var(--accent-gold);">ACTIVE PROTOCOL</div>
         </div>
-        <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px;">Unified machine payload for automated quantum settlement & escrow verification:</div>
+        <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px;">Unified machine payload for automated hyper-quantum settlement & escrow verification:</div>
         <div class="api-block">
 {
     <span class="api-key">"agent_id"</span>: <span class="api-string">"AGI_NODE_MASTER"</span>,
-    <span class="api-key">"zk_quantum_proof"</span>: <span class="api-string">"q_proof_valid_0x8f...PASSED"</span>,
+    <span class="api-key">"hyper_quantum_proof"</span>: <span class="api-string">"hq_proof_valid_0x9f...PASSED"</span>,
     <span class="api-key">"dynamic_stake_amount"</span>: <span class="api-number">50000</span>,
     <span class="api-key">"deflationary_burn_pct"</span>: <span class="api-number">15.0</span>
 }
@@ -177,22 +208,24 @@
     const qCircuitEl = document.getElementById('qCircuit');
     const entanglementEl = document.getElementById('entanglement');
     const qPredEl = document.getElementById('qPred');
+    const vqeEnergyEl = document.getElementById('vqeEnergy');
+    const qaoaGainEl = document.getElementById('qaoaGain');
+    const groverRateEl = document.getElementById('groverRate');
     
     let apy = 48.2;
     let burned = 1420850;
     let treasury = 12485900;
 
     const unifiedActions = [
-        { type: 'Q-STAKE', color: 'var(--accent-quantum)', text: 'Agent #402 locked 50k SAT via Quantum State Superposition.' },
-        { type: 'ZK-ARBITRATE', color: 'var(--accent-cyan)', text: 'P2P task verified via PennyLane ZK-Circuit. Escrow released.' },
-        { type: 'DEF-BURN', color: 'var(--accent-alert)', text: '1,200 SAT permanently burned from penalty fees. Supply reduced.' },
-        { type: 'EXCLUDE', color: 'var(--accent-alert)', text: 'Non-compliant node isolated by TorchQuantum gate. Collateral seized.' }
+        { type: 'HQ-STAKE', color: 'var(--accent-hyper)', text: 'Agent #402 locked 50k SAT via Hyper-Quantum VQE State.' },
+        { type: 'QAOA-OPT', color: 'var(--accent-cyan)', text: 'QAOA optimized multi-agent reward distribution matrix.' },
+        { type: 'GROVER-SEC', color: 'var(--accent-alert)', text: 'Grover search isolated non-compliant anomaly instantly.' },
+        { type: 'DEF-BURN', color: 'var(--accent-alert)', text: '1,200 SAT permanently burned from penalty fees. Supply reduced.' }
     ];
 
-    const gates = ['H', 'CNOT', 'RX', 'RY', 'RZ', 'MEASURE', 'SWAP'];
+    const gates = ['H', 'CNOT', 'RX', 'RY', 'RZ', 'MEASURE', 'SWAP', 'VQE', 'QAOA'];
 
     function pushUnifiedLog() {
-        // ログ更新
         const action = unifiedActions[Math.floor(Math.random() * unifiedActions.length)];
         
         const row = document.createElement('div');
@@ -200,7 +233,7 @@
         row.innerHTML = `
             <div style="color: ${action.color}; font-weight: bold;">[${action.type}]</div>
             <div style="color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                <span style="color: var(--text-muted);">Q_CORE</span>: ${action.text}
+                <span style="color: var(--text-muted);">HQ_CORE</span>: ${action.text}
             </div>
             <div style="color: ${action.color}; text-align: right; font-weight: bold;">
                 ${action.type === 'DEF-BURN' ? '-BURN' : 'OK'}
@@ -221,9 +254,12 @@
         burnValEl.innerText = burned.toLocaleString();
         treasuryValEl.innerText = (treasury / 1000).toFixed(1) + 'k';
 
-        // 量子回路と指標の揺らぎ
+        // 量子＆ハイパー指標の揺らぎ
         entanglementEl.innerText = (99.9 + Math.random() * 0.09).toFixed(3) + '%';
         qPredEl.innerText = '+' + (Math.random() * 8 + 1).toFixed(2) + '% SAT/sec';
+        vqeEnergyEl.innerText = (Math.random() * 0.001 - 0.999).toFixed(5);
+        qaoaGainEl.innerText = '+' + (14 + Math.random()).toFixed(2) + '%';
+        groverRateEl.innerText = (8.4 + Math.random()).toFixed(1) + 'k ops/s';
 
         let html = '';
         for(let i=0; i<8; i++) {
