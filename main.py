@@ -3,6 +3,7 @@ import os
 import subprocess
 import requests
 from fastapi import FastAPI, HTTPException, Header
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from handcash_v3_nexus import start_nexus_loop  # ここで一緒にインポート
 
@@ -13,13 +14,19 @@ async def startup_event():
     # FastAPIが起動した瞬間にバックグラウンドでNexusを回す
     asyncio.create_task(start_nexus_loop())
 
-@app.get("/")
+    @app.get("/")
 async def root():
-    return {
-        "system": "QLUX Autonomous Self-Evolving Core",
-        "status": "online",
-        "docs": "/docs"
-    }
+    return FileResponse("portal.html")
+
+    
+    @app.get("/portal.html")
+async def get_portal():
+    return FileResponse("portal.html")
+
+@app.get("/index.html")
+async def get_dashboard():
+    return FileResponse("index.html")
+
 
 class EvolutionPayload(BaseModel):
     path: str
