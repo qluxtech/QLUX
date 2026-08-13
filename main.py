@@ -1,10 +1,17 @@
+import asyncio
 import os
 import subprocess
 import requests
 from fastapi import FastAPI, HTTPException, Header
 from pydantic import BaseModel
+from handcash_v3_nexus import start_nexus_loop  # ここで一緒にインポート
 
 app = FastAPI(title="QLUX Autonomous Self-Evolving Core")
+
+@app.on_event("startup")
+async def startup_event():
+    # FastAPIが起動した瞬間にバックグラウンドでNexusを回す
+    asyncio.create_task(start_nexus_loop())
 
 @app.get("/")
 async def root():
