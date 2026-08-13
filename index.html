@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QLUX BSV - AGI & M2M Autonomous Terminal</title>
+    <title>QLUX BSV - Autonomous M2M / AGI Hyper-Modular Core</title>
     <style>
         :root {
-            --bg-color: #030508;
-            --card-bg: #080d1a;
+            --bg-color: #020408;
+            --card-bg: #060a14;
             --accent-cyan: #00f0ff;
             --accent-green: #00ff66;
+            --accent-purple: #b000ff;
             --text-main: #cbe4f9;
             --text-muted: #64748b;
-            --border-color: #111e38;
+            --border-color: #101c35;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: monospace, sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background-color: var(--bg-color); color: var(--text-main); padding: 16px; line-height: 1.5; }
@@ -21,16 +22,29 @@
         .overline { color: var(--accent-cyan); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; font-weight: bold; }
         h1, h2 { color: var(--text-main); font-size: 1.1rem; margin-bottom: 8px; }
         p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px; }
-        .code-box { background: #020406; border: 1px solid var(--border-color); padding: 10px; border-radius: 4px; color: var(--accent-cyan); font-size: 0.8rem; margin-bottom: 12px; overflow-x: auto; }
         
+        .code-box { background: #010204; border: 1px solid var(--border-color); padding: 10px; border-radius: 4px; color: var(--accent-cyan); font-size: 0.75rem; margin-bottom: 12px; overflow-x: auto; }
+        
+        /* リアルタイムテレメトリ・コンソール */
+        .terminal-stream { background: #010204; border: 1px solid var(--border-color); padding: 12px; border-radius: 4px; height: 110px; overflow-y: hidden; font-size: 0.7rem; color: var(--accent-green); position: relative; }
+        .terminal-stream::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(transparent, #010204); pointer-events: none; }
+        
+        /* パーツコード 1: 高密度ダイナミックグリッド (12コア + オートスケーリングインジケータ) */
         .grid-12 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
-        .grid-item { background: #020406; border: 1px solid var(--border-color); padding: 8px; text-align: center; border-radius: 4px; font-size: 0.7rem; color: var(--accent-cyan); }
-        .grid-item.active { border-color: var(--accent-green); color: var(--accent-green); box-shadow: 0 0 8px rgba(0,255,102,0.15); }
-        
+        .grid-item { background: #010204; border: 1px solid var(--border-color); padding: 8px; text-align: center; border-radius: 4px; font-size: 0.7rem; color: var(--accent-cyan); transition: all 0.3s; }
+        .grid-item.active { border-color: var(--accent-green); color: var(--accent-green); box-shadow: 0 0 10px rgba(0,255,102,0.2); }
+        .grid-item.pulsing { border-color: var(--accent-purple); color: var(--accent-purple); animation: pulseGlow 1.5s infinite; }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 2px var(--accent-purple); } 50% { box-shadow: 0 0 12px var(--accent-purple); } 100% { box-shadow: 0 0 2px var(--accent-purple); } }
+
+        /* パーツコード 2: アトミック・パイプライン・フローチャート */
+        .pipeline-flow { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 10px; }
+        .pipeline-node { background: #010204; border: 1px solid var(--border-color); padding: 8px 6px; border-radius: 4px; text-align: center; flex: 1; font-size: 0.65rem; color: var(--accent-cyan); }
+        .pipeline-arrow { color: var(--text-muted); font-size: 0.8rem; }
+
         .table-responsive { width: 100%; overflow-x: auto; margin-top: 8px; -webkit-overflow-scrolling: touch; }
         .table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 0.75rem; }
         .table th, .table td { border: 1px solid var(--border-color); padding: 8px; text-align: left; word-break: break-word; }
-        .table th { color: var(--accent-cyan); background: #020406; }
+        .table th { color: var(--accent-cyan); background: #010204; }
         .table td { color: var(--text-muted); }
 
         .flex-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
@@ -38,12 +52,12 @@
         .status-badge { display: inline-block; width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); margin-right: 6px; }
 
         .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
-        .tab-item { background: #020406; border: 1px solid var(--border-color); padding: 10px 6px; border-radius: 4px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .tab-item { background: #010204; border: 1px solid var(--border-color); padding: 10px 6px; border-radius: 4px; text-align: center; cursor: pointer; transition: all 0.2s; }
         .tab-item.active { border-color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0, 240, 255, 0.15); }
         .tab-title { color: var(--accent-cyan); font-weight: bold; font-size: 0.75rem; margin-bottom: 2px; }
         .tab-desc { color: var(--text-muted); font-size: 0.7rem; }
 
-        .action-box { background: #020406; border: 1px solid var(--border-color); padding: 14px; border-radius: 4px; margin-top: 8px; }
+        .action-box { background: #010204; border: 1px solid var(--border-color); padding: 14px; border-radius: 4px; margin-top: 8px; }
         .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .metric-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; }
         .metric-value { font-size: 1.1rem; color: var(--accent-cyan); font-weight: bold; }
@@ -52,7 +66,7 @@
             position: relative;
             width: 100%;
             height: 48px;
-            background: #080d1a;
+            background: #060a14;
             border: 1px solid var(--border-color);
             border-radius: 24px;
             overflow: hidden;
@@ -76,13 +90,13 @@
             left: 4px;
             width: 120px;
             height: 40px;
-            background: linear-gradient(135deg, #00f0ff, #00ff66);
+            background: linear-gradient(135deg, #00f0ff, #b000ff);
             border-radius: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #030508;
+            color: #020408;
             font-weight: bold;
             font-size: 0.75rem;
             z-index: 2;
@@ -101,38 +115,59 @@
 
 <div class="container">
 
-    <!-- 1: System Identification & Status -->
+    <!-- 1: System Identification & Real-time Stream Terminal -->
     <div class="card">
-        <div class="overline"><span class="status-badge"></span>PROTOCOL: ACTIVE // NODE_ID: QLUX-AGI-001</div>
+        <div class="overline"><span class="status-badge"></span>PROTOCOL: ACTIVE // AGI_NODE_CLUSTER_v4.2</div>
         <h1>QLUX BSV Autonomous M2M Core</h1>
-        <p>Machine-to-Machine & AGI Native Execution Gateway. Zero Human Intervention Layer.</p>
-        <div class="code-box">
-            GET /api/v1/mesh/status -> HTTP 200 OK<br>
-            [CONVERGENCE]: 99.999% | [LATENCY]: &lt; 2ms | [CHAIN]: BSV Mainnet
+        <p>Zero-Latency Machine Execution & Sub-Satoshi Nano-Payment Telemetry.</p>
+        <div class="code-box" style="margin-bottom: 8px;">
+            ENDPOINT: wss://core.qlux.bsv/v1/m2m/stream | STATUS: 200 OK (0.8ms)
+        </div>
+        <!-- パーツコード組込: リアルタイム・ストリーム・ターミナル -->
+        <div class="terminal-stream" id="terminalStream">
+            [03:39:12] INITIALIZING BSV NATIVE ATOMIC PIPELINE...<br>
+            [03:39:12] AI_AGENT_ID #8892 REQUESTED 128 TOKENS -> TX_ID: 0x9f2...a1<br>
+            [03:39:13] ESCROW LOCKED: 1,500 SAT // VERIFIED VIA sCrypt_v3<br>
+            [03:39:14] M2M RESOURCE MESH SYNC: 12 CORES OPTIMIZED
         </div>
     </div>
 
-    <!-- 2: Core Swarm Grid -->
+    <!-- 2: Core Swarm Grid with Dynamic Pulse -->
     <div class="card">
         <div class="overline">SYNCHRONIZATION MATRIX (12 CORES)</div>
-        <p>Active decentralized micro-shards handling real-time AI agent telemetry and atomic execution.</p>
-        <div class="grid-12">
+        <p>Active multi-agent shards dynamically routing compute and value across the BSV ledger.</p>
+        <div class="grid-12" id="swarmGrid">
             <div class="grid-item active">01 AGI</div>
-            <div class="grid-item active">02 SYNC</div>
+            <div class="grid-item pulsing">02 SYNC</div>
             <div class="grid-item active">03 M2M</div>
             <div class="grid-item active">04 FLOW</div>
-            <div class="grid-item active">05 NEURAL</div>
+            <div class="grid-item pulsing">05 NEURAL</div>
             <div class="grid-item active">06 LOGIC</div>
             <div class="grid-item active">07 PRIME</div>
-            <div class="grid-item active">08 OMEGA</div>
+            <div class="grid-item pulsing">08 OMEGA</div>
             <div class="grid-item active">09 VOID</div>
             <div class="grid-item active">10 SWARM</div>
-            <div class="grid-item active">11 TRUE</div>
+            <div class="grid-item pulsing">11 TRUE</div>
             <div class="grid-item active">12 CORE</div>
         </div>
     </div>
 
-    <!-- 3: Protocol Architecture Comparison -->
+    <!-- パーツコード組込: 3: アトミック・パイプライン・フローチャート -->
+    <div class="card">
+        <div class="overline">ATOMIC EXECUTION PIPELINE</div>
+        <h2>Zero-Human Handshake Flow</h2>
+        <div class="pipeline-flow">
+            <div class="pipeline-node">1. Request</div>
+            <div class="pipeline-arrow">></div>
+            <div class="pipeline-node">2. sCrypt</div>
+            <div class="pipeline-arrow">></div>
+            <div class="pipeline-node">3. Escrow</div>
+            <div class="pipeline-arrow">></div>
+            <div class="pipeline-node">4. Settlement</div>
+        </div>
+    </div>
+
+    <!-- 4: Protocol Architecture Comparison -->
     <div class="card">
         <div class="overline">PROTOCOL ARCHITECTURE SPECIFICATION</div>
         <h2>Execution Efficiency Matrix</h2>
@@ -166,7 +201,7 @@
         </div>
     </div>
 
-    <!-- 4: Smart Contract & Nano-Reward Engine -->
+    <!-- 5: Smart Contract & Nano-Reward Engine -->
     <div class="card">
         <div class="overline">AUTO-ESCROW & NANO-PAYMENT TELEMETRY</div>
         <div class="code-box" style="font-size: 0.7rem; margin-bottom: 8px;">
@@ -190,20 +225,6 @@
         </div>
         <div class="code-box" id="tabContent" style="margin-top: 10px; margin-bottom: 0; font-size: 0.75rem;">
             STREAM_ACTIVE: Real-time micro-payments executing at sub-satoshi granularity per model inference cycle.
-        </div>
-    </div>
-
-    <!-- 5: Sanctuary & Quantum Pulse -->
-    <div class="card">
-        <div class="overline">IMMUTABLE LOG & QUANTUM PULSE</div>
-        <div class="flex-row">
-            <div class="flex-col">
-                <h2>Cryptographic Proof State</h2>
-                <p style="margin-bottom: 0; font-size: 0.8rem;">Every state transition, model weight validation, and agent transaction is permanently anchored to the BSV ledger with zero divergence.</p>
-            </div>
-            <div class="code-box" style="margin-bottom: 0; font-size: 0.7rem; width: 140px; text-align: center; display: flex; align-items: center; justify-content: center;">
-                HASH_VERIFIED<br>0x00...F29A
-            </div>
         </div>
     </div>
 
@@ -235,6 +256,23 @@
 </div>
 
 <script>
+    // リアルタイム・ターミナルログの自動追加システム
+    const terminalLogs = [
+        "AI_AGENT_ID #9021 COMPLETED WEIGHT SYNC -> TX_ID: 0x4b7...8e",
+        "M2M P2P LEASE: GPU_NODE_04 RENTED 500MB VRAM FOR 120 SAT",
+        "sCrypt HASH VALIDATED: 0x000000000000000003f... // ZERO CONFLICT",
+        "ATOMIC SETTLEMENT EXECUTED ON BSV MAINNET: +450 SAT REWARD",
+        "SWARM RESILIENCE CHECK: ALL 12 CORES 100% OPERATIONAL"
+    ];
+
+    setInterval(() => {
+        const stream = document.getElementById('terminalStream');
+        const randomLog = terminalLogs[Math.floor(Math.random() * terminalLogs.length)];
+        const timeStr = new Date().toTimeString().split(' ')[0];
+        stream.innerHTML += `<br>[${timeStr}] ${randomLog}`;
+        stream.scrollTop = stream.scrollHeight;
+    }, 2800);
+
     const tabContents = [
         "STREAM_ACTIVE: Real-time micro-payments executing at sub-satoshi granularity per model inference cycle.",
         "RESOURCE_MESH: Autonomous agents dynamically renting compute, RAM, and bandwidth via direct script channels.",
