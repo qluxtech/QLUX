@@ -3,62 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QLUX BSV - Absolute Sovereign Engine</title>
+    <title>QLUX BSV - AGI & M2M Autonomous Terminal</title>
     <style>
         :root {
-            --bg-color: #070b12;
-            --card-bg: #0d1424;
+            --bg-color: #030508;
+            --card-bg: #080d1a;
             --accent-cyan: #00f0ff;
-            --text-main: #e2e8f0;
-            --text-muted: #8a99ad;
-            --border-color: #1e293b;
+            --accent-green: #00ff66;
+            --text-main: #cbe4f9;
+            --text-muted: #64748b;
+            --border-color: #111e38;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: monospace, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-color); color: var(--text-main); padding: 20px; line-height: 1.6; }
-        .container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 24px; position: relative; overflow: hidden; }
-        .overline { color: var(--accent-cyan); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; font-weight: bold; }
-        h1, h2 { color: var(--text-main); font-size: 1.25rem; margin-bottom: 12px; }
-        p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; }
-        .code-box { background: #04060a; border: 1px solid var(--border-color); padding: 12px; border-radius: 4px; color: var(--accent-cyan); font-size: 0.85rem; margin-bottom: 16px; overflow-x: auto; }
+        body { background-color: var(--bg-color); color: var(--text-main); padding: 16px; line-height: 1.5; }
+        .container { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 20px; position: relative; overflow: hidden; }
+        .overline { color: var(--accent-cyan); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; font-weight: bold; }
+        h1, h2 { color: var(--text-main); font-size: 1.1rem; margin-bottom: 8px; }
+        p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px; }
+        .code-box { background: #020406; border: 1px solid var(--border-color); padding: 10px; border-radius: 4px; color: var(--accent-cyan); font-size: 0.8rem; margin-bottom: 12px; overflow-x: auto; }
         
-        .grid-12 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
-        .grid-item { background: #04060a; border: 1px solid var(--border-color); padding: 10px; text-align: center; border-radius: 4px; font-size: 0.75rem; color: var(--accent-cyan); }
+        .grid-12 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
+        .grid-item { background: #020406; border: 1px solid var(--border-color); padding: 8px; text-align: center; border-radius: 4px; font-size: 0.7rem; color: var(--accent-cyan); }
+        .grid-item.active { border-color: var(--accent-green); color: var(--accent-green); box-shadow: 0 0 8px rgba(0,255,102,0.15); }
         
-        /* テーブルのはみ出し防止・レスポンシブ化 */
-        .table-responsive { width: 100%; overflow-x: auto; margin-top: 12px; -webkit-overflow-scrolling: touch; }
-        .table { width: 100%; min-width: 500px; border-collapse: collapse; font-size: 0.8rem; }
-        .table th, .table td { border: 1px solid var(--border-color); padding: 10px; text-align: left; word-break: break-word; }
-        .table th { color: var(--accent-cyan); background: #04060a; }
+        .table-responsive { width: 100%; overflow-x: auto; margin-top: 8px; -webkit-overflow-scrolling: touch; }
+        .table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 0.75rem; }
+        .table th, .table td { border: 1px solid var(--border-color); padding: 8px; text-align: left; word-break: break-word; }
+        .table th { color: var(--accent-cyan); background: #020406; }
         .table td { color: var(--text-muted); }
 
-        .flex-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+        .flex-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
         .flex-col { flex: 1; }
-        .icon-circle { width: 60px; height: 60px; border: 1px dashed var(--accent-cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-cyan); flex-shrink: 0; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); }
-        
-        .sub-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
-        .sub-card { background: #04060a; border: 1px solid var(--border-color); padding: 14px; border-radius: 6px; }
+        .status-badge { display: inline-block; width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); margin-right: 6px; }
 
-        /* タブ切り替え用 */
-        .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
-        .tab-item { background: #04060a; border: 1px solid var(--border-color); padding: 12px 8px; border-radius: 6px; text-align: center; cursor: pointer; transition: all 0.2s; }
-        .tab-item.active { border-color: var(--accent-cyan); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
-        .tab-title { color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem; margin-bottom: 4px; }
-        .tab-desc { color: var(--text-muted); font-size: 0.75rem; }
+        .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
+        .tab-item { background: #020406; border: 1px solid var(--border-color); padding: 10px 6px; border-radius: 4px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .tab-item.active { border-color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0, 240, 255, 0.15); }
+        .tab-title { color: var(--accent-cyan); font-weight: bold; font-size: 0.75rem; margin-bottom: 2px; }
+        .tab-desc { color: var(--text-muted); font-size: 0.7rem; }
 
-        /* スワイプコンポーネント用スタイル */
-        .action-box { background: #04060a; border: 1px solid var(--border-color); padding: 16px; border-radius: 6px; text-align: center; margin-top: 12px; }
-        .balance-container { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
-        .balance { font-size: 1.5rem; color: var(--accent-cyan); font-weight: bold; }
-        .pending-balance { font-size: 0.9rem; color: var(--accent-cyan); font-weight: bold; }
+        .action-box { background: #020406; border: 1px solid var(--border-color); padding: 14px; border-radius: 4px; margin-top: 8px; }
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .metric-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; }
+        .metric-value { font-size: 1.1rem; color: var(--accent-cyan); font-weight: bold; }
         
         .swipe-container {
             position: relative;
             width: 100%;
-            height: 54px;
-            background: #0d1424;
+            height: 48px;
+            background: #080d1a;
             border: 1px solid var(--border-color);
-            border-radius: 27px;
+            border-radius: 24px;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -70,34 +66,34 @@
             width: 100%;
             text-align: center;
             color: var(--accent-cyan);
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
             pointer-events: none;
             z-index: 1;
         }
         .swipe-btn {
             position: absolute;
             left: 4px;
-            width: 130px;
-            height: 44px;
-            background: linear-gradient(135deg, #00f0ff, #0077ff);
-            border-radius: 22px;
+            width: 120px;
+            height: 40px;
+            background: linear-gradient(135deg, #00f0ff, #00ff66);
+            border-radius: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #070b12;
+            color: #030508;
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             z-index: 2;
             transition: background 0.2s;
         }
         .swipe-container.completed .swipe-btn {
-            background: #00ff66;
-            transform: translateX(calc(100% - 138px));
+            background: var(--accent-green);
+            transform: translateX(calc(100% - 128px));
         }
         .swipe-container.completed .swipe-text {
-            color: #00ff66;
+            color: var(--accent-green);
         }
     </style>
 </head>
@@ -105,204 +101,133 @@
 
 <div class="container">
 
-    <!-- 1番: 1枚目 (11951_4.jpg) -->
-    <div class="card" style="text-align: center;">
-        <div class="overline">ABSOLUTE SOVEREIGN</div>
-        <h1 style="font-size: 2rem; color: var(--accent-cyan); text-shadow: 0 0 20px rgba(0,240,255,0.4); margin: 12px 0;">QLUX</h1>
-        <p style="color: var(--text-main); font-weight: bold; margin-bottom: 8px;">The Ultimate Sovereign Engine of Infinite Economic Convergence.</p>
-        <p>ビットコインSV（BSV）の無限スケーラビリティを基盤とし、あらゆる既存の搾取構造を完全に無効化する、地球上最強の自律分散執行レイヤー。</p>
-    </div>
-
+    <!-- 1: System Identification & Status -->
     <div class="card">
-        <div class="overline">THE SUPREME HIERARCHY</div>
-        <div style="background: #04060a; border: 1px solid var(--accent-cyan); padding: 16px; border-radius: 6px; text-align: center; margin-bottom: 12px; box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);">
-            <h2 style="font-size: 1rem; color: var(--text-main); margin-bottom: 6px;">QLUX BSV: Sovereign Command Gateway</h2>
-            <p style="margin-bottom: 0; font-size: 0.85rem;">すべての経済価値、契約、データ主権を絶対的かつ統約的に支配下に置く究極の最高司令塔。</p>
-        </div>
-        <div style="text-align: center; color: var(--accent-cyan); font-size: 1.2rem; margin-bottom: 12px;">↓</div>
-        <div class="code-box" style="margin-bottom: 0; text-align: center;">
-            BSV Native Global Infrastructure & Atomic Execution Tier: 遅延ゼロ・改ざん不能の超高速トランザクション網
+        <div class="overline"><span class="status-badge"></span>PROTOCOL: ACTIVE // NODE_ID: QLUX-AGI-001</div>
+        <h1>QLUX BSV Autonomous M2M Core</h1>
+        <p>Machine-to-Machine & AGI Native Execution Gateway. Zero Human Intervention Layer.</p>
+        <div class="code-box">
+            GET /api/v1/mesh/status -> HTTP 200 OK<br>
+            [CONVERGENCE]: 99.999% | [LATENCY]: &lt; 2ms | [CHAIN]: BSV Mainnet
         </div>
     </div>
 
-    <!-- 2番: 2枚目 (11952_4.jpg) -->
+    <!-- 2: Core Swarm Grid -->
     <div class="card">
-        <div class="overline">GLOBAL SYNCHRONIZATION</div>
-        <p style="margin-bottom: 12px;">地球規模の経済同時性をミリ秒単位で完全担保する、12の完全同期コア・モジュール。</p>
+        <div class="overline">SYNCHRONIZATION MATRIX (12 CORES)</div>
+        <p>Active decentralized micro-shards handling real-time AI agent telemetry and atomic execution.</p>
         <div class="grid-12">
-            <div class="grid-item">01 MATRIX</div>
-            <div class="grid-item">02 SYNC</div>
-            <div class="grid-item">03 PULSE</div>
-            <div class="grid-item">04 FLOW</div>
-            <div class="grid-item">05 AXIOM</div>
-            <div class="grid-item">06 LOGIC</div>
-            <div class="grid-item">07 PRIME</div>
-            <div class="grid-item">08 OMEGA</div>
-            <div class="grid-item">09 VOID</div>
-            <div class="grid-item">10 ZEN</div>
-            <div class="grid-item">11 TRUE</div>
-            <div class="grid-item">12 CORE</div>
+            <div class="grid-item active">01 AGI</div>
+            <div class="grid-item active">02 SYNC</div>
+            <div class="grid-item active">03 M2M</div>
+            <div class="grid-item active">04 FLOW</div>
+            <div class="grid-item active">05 NEURAL</div>
+            <div class="grid-item active">06 LOGIC</div>
+            <div class="grid-item active">07 PRIME</div>
+            <div class="grid-item active">08 OMEGA</div>
+            <div class="grid-item active">09 VOID</div>
+            <div class="grid-item active">10 SWARM</div>
+            <div class="grid-item active">11 TRUE</div>
+            <div class="grid-item active">12 CORE</div>
         </div>
     </div>
 
+    <!-- 3: Protocol Architecture Comparison -->
     <div class="card">
-        <div class="overline">THE ACT OF RESET</div>
-        <h2>スワイプ。それは旧世界的不条理への「完全な決別」。</h2>
-        <p>仲介者の許可や理不尽な手数料を待つ暗黒の時代は、ここで終わりを迎えます。指先でスワイプした瞬間、BSVの数学的真理に基づいた真の富が、あなたのウォレットへダイレクトに直結されます。</p>
-        
-        <div class="sub-cards">
-            <div class="sub-card">
-                <div class="overline" style="margin-bottom: 4px;">Impact: 依存関係の完全消滅</div>
-                <p style="font-size: 0.8rem; margin-bottom: 0;">中央銀行や国家の恣意的な介入を排し、不変のプロトコルコードが直接あなたを主権者として認識します。</p>
-            </div>
-            <div class="sub-card">
-                <div class="overline" style="margin-bottom: 4px;">Effect: 絶対的自由の確定</div>
-                <p style="font-size: 0.8rem; margin-bottom: 0;">タイムラグはゼロへ。未清算の可能性はすべて排除され、その場で即時利用可能な現実の購買力へと昇華されます。</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3番: 3枚目 (11953_4.jpg) -->
-    <div class="card">
-        <div class="overline">UNIVERSAL MESH</div>
-        <div class="flex-row">
-            <div class="flex-col">
-                <h2>地球規模の経済再構築</h2>
-                <p style="margin-bottom: 0;">国境、言語、階層の壁。QLUX BSVはそれらをデータ的に無効化し、地球上のあらゆる経済活動を一つの均質な高効率網（Mesh）へと完全に収束させます。</p>
-            </div>
-            <div class="icon-circle">🌐</div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="overline">THE ABSOLUTE COMPARISON</div>
-        <h2>QLUX BSVは単なる「システム改善」ではありません。人類の富の定義そのものの書き換えです。</h2>
+        <div class="overline">PROTOCOL ARCHITECTURE SPECIFICATION</div>
+        <h2>Execution Efficiency Matrix</h2>
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Metaphysics</th>
-                        <th>Legacy Banking / Web3 Apps</th>
-                        <th>QLUX BSV Sovereign Engine</th>
+                        <th>Parameter</th>
+                        <th>Legacy API / Web3 Oracle</th>
+                        <th>QLUX BSV AGI Engine</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Trust Source</td>
-                        <td>Human / Institutional Trust</td>
-                        <td>Mathematical Absolute Integrity (BSV)</td>
+                        <td>Throughput</td>
+                        <td>Rate-limited / Bottlenecked</td>
+                        <td>Infinite Native Scale (BSV)</td>
                     </tr>
                     <tr>
-                        <td>Settlement Time</td>
-                        <td>Pending (High Friction & Fees)</td>
-                        <td>Native Atomic & Instant (Frictionless)</td>
+                        <td>Settlement</td>
+                        <td>Batch / Probabilistic</td>
+                        <td>Atomic Instantaneous</td>
                     </tr>
                     <tr>
-                        <td>Ownership</td>
-                        <td>Custodial (Third-party Control)</td>
-                        <td>Absolute Self-Sovereignty (100% Yours)</td>
+                        <td>Control Flow</td>
+                        <td>Human Auth Required</td>
+                        <td>100% Autonomous Script-Driven</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- 4番: 4枚目 (11954_4.jpg) -->
+    <!-- 4: Smart Contract & Nano-Reward Engine -->
     <div class="card">
-        <div class="overline">MATHEMATICAL TRUST</div>
-        <div class="flex-row">
-            <div class="flex-col">
-                <h2>契約の自動執行 (Auto-Escrow)</h2>
-                <div class="code-box" style="font-size: 0.75rem; margin-bottom: 10px;">
-                    P_settle<br>
-                    Action = Verified<br>
-                    Instant BSV TX
-                </div>
-                <p style="margin-bottom: 0;">BSVネイティブのスマートコントラクトが、物理法則のように不変の契約を自動執行。</p>
-            </div>
-            <div class="icon-circle" style="border-radius: 4px; transform: rotate(45deg); display: flex; align-items: center; justify-content: center;">
-                <span style="transform: rotate(-45deg); font-size: 0.7rem; text-align: center; color: var(--accent-cyan);">QLUX BSV<br>CORE</span>
-            </div>
+        <div class="overline">AUTO-ESCROW & NANO-PAYMENT TELEMETRY</div>
+        <div class="code-box" style="font-size: 0.7rem; margin-bottom: 8px;">
+            EXEC: sCrypt_Verify(AI_Inference) == true<br>
+            -> Auto_Release(Escrow_Pool)<br>
+            -> TxID: bsv_native_atomic_stream
         </div>
-    </div>
-
-    <div class="card">
-        <div class="overline">AUTO-NANO-REWARD ECONOMY</div>
-        <p style="margin-bottom: 8px;">「生きているだけで価値が循環する」マネタイズの新次元（クリックして切替）</p>
         <div class="tabs">
             <div class="tab-item active" onclick="switchTab(0)">
-                <div class="tab-title">Active Viewing</div>
-                <div class="tab-desc">視る瞬間に還元</div>
+                <div class="tab-title">Inference Pay</div>
+                <div class="tab-desc">Per-Token Stream</div>
             </div>
             <div class="tab-item" onclick="switchTab(1)">
-                <div class="tab-title">Data Sovereignty</div>
-                <div class="tab-desc">バックグラウンド報酬</div>
+                <div class="tab-title">Resource Mesh</div>
+                <div class="tab-desc">GPU/Data Lease</div>
             </div>
             <div class="tab-item" onclick="switchTab(2)">
-                <div class="tab-title">Collective Wealth</div>
-                <div class="tab-desc">ネットワーク全体分配</div>
+                <div class="tab-title">Swarm Yield</div>
+                <div class="tab-desc">Auto-Distribution</div>
             </div>
         </div>
-        <div class="sub-card" id="tabContent" style="margin-top: 12px; font-size: 0.85rem;">
-            情報を視るその瞬間に、あなたの時間は微小ナノペイメントとしてリアルタイム還元。
+        <div class="code-box" id="tabContent" style="margin-top: 10px; margin-bottom: 0; font-size: 0.75rem;">
+            STREAM_ACTIVE: Real-time micro-payments executing at sub-satoshi granularity per model inference cycle.
         </div>
     </div>
 
-    <!-- 5番: 5枚目 (11955_4.jpg) -->
+    <!-- 5: Sanctuary & Quantum Pulse -->
     <div class="card">
-        <div class="overline">ETERNAL SANCTUARY</div>
+        <div class="overline">IMMUTABLE LOG & QUANTUM PULSE</div>
         <div class="flex-row">
             <div class="flex-col">
-                <h2>改ざん不能の不変性</h2>
-                <p style="margin-bottom: 0;">一度BSVのブロックチェーンに刻まれた真実は、宇宙の法則のように決して揺らぎません。QLUX BSVはすべての取引に「永遠」という名の絶対的セキュリティを付与します。</p>
+                <h2>Cryptographic Proof State</h2>
+                <p style="margin-bottom: 0; font-size: 0.8rem;">Every state transition, model weight validation, and agent transaction is permanently anchored to the BSV ledger with zero divergence.</p>
             </div>
-            <div class="icon-circle" style="border-style: solid; border-radius: 4px;">⬡</div>
+            <div class="code-box" style="margin-bottom: 0; font-size: 0.7rem; width: 140px; text-align: center; display: flex; align-items: center; justify-content: center;">
+                HASH_VERIFIED<br>0x00...F29A
+            </div>
         </div>
     </div>
 
+    <!-- 6: Final Handshake / Execution Trigger -->
     <div class="card">
-        <div class="overline">QUANTUM PULSE</div>
-        <div class="flex-row">
-            <div class="flex-col">
-                <h2>量子同期ネットワーク</h2>
-                <p style="margin-bottom: 0;">地球規模の経済データをミリ秒単位で束ねる分散共鳴コア。すべてのトランザクションが絶対的なエネルギーパルスとしてBSV上で美しく同期されます。</p>
-            </div>
-            <div class="icon-circle">◎</div>
-        </div>
-    </div>
-
-    <!-- 6番: 6枚目 (11956_4.jpg) -->
-    <div class="card">
-        <div class="overline">THE SINGULARITY</div>
-        <div class="flex-row">
-            <div class="flex-col">
-                <h2>価値の集束点</h2>
-                <p style="margin-bottom: 0;">宇宙のすべての光が一点に集まるように、世界中の富と価値があなたの掌へと集約される。QLUX BSVは、経済の重力そのものを完全に再定義します。</p>
-            </div>
-            <div class="icon-circle">✦</div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="overline">THE FINAL STEP</div>
-        <h2>最後のステップ。主権をあなたの掌へ。</h2>
-        <p>中間搾取の連鎖は、ここで完全に断ち切られました。すべてのインフラ、すべてのスマートコントラクト、すべての数学的証明が今、あなたの指先に集結しています。「自分の価値を、傍観者ではなく、自分自身の見識で完全かつ絶対に確定させる」――これこそが、人類がたどり着いた究極の経済的解放です。</p>
+        <div class="overline">SYSTEM HANDSHAKE // FINAL ACTIVATION</div>
+        <h2>Autonomous Mesh Synchronization</h2>
+        <p>Initialize permanent script execution across all connected M2M endpoints.</p>
         
         <div class="action-box">
-            <div class="balance-container">
+            <div class="metrics-grid">
                 <div>
-                    <div class="overline" style="text-align: left; margin-bottom: 2px;">SOVEREIGN ACTIVE BALANCE</div>
-                    <div class="balance" id="balanceText">57,450,000 SAT</div>
+                    <div class="metric-label">Active Swarm Balance</div>
+                    <div class="metric-value" id="balanceText">1,250,000,000 SAT</div>
                 </div>
                 <div style="text-align: right;">
-                    <div style="font-size: 0.7rem; color: var(--text-muted);">PENDING BSV REWARDS</div>
-                    <div class="pending-balance">5,500,000 SAT</div>
+                    <div class="metric-label">Pending Escrow Yield</div>
+                    <div class="metric-value" style="color: var(--accent-green);">45,000,000 SAT</div>
                 </div>
             </div>
             
             <div class="swipe-container" id="swipeContainer">
-                <div class="swipe-text" id="swipeText">👉 SLIDE TO TELEPORT VALUE</div>
-                <div class="swipe-btn" id="swipeBtn">SWIPE QLUX</div>
+                <div class="swipe-text" id="swipeText">>> SLIDE TO INITIATE MESH SYNC >></div>
+                <div class="swipe-btn" id="swipeBtn">EXECUTE SYNC</div>
             </div>
         </div>
     </div>
@@ -310,11 +235,10 @@
 </div>
 
 <script>
-    // タブ切り替え機能
     const tabContents = [
-        "情報を視るその瞬間に、あなたの時間は微小ナノペイメントとしてリアルタイム還元。",
-        "日常のデータ共有の背景でマイクロ報酬が動き続け、参加者全員が自動的に豊かになる。",
-        "エコシステムへの参加深度に応じ、ネットワーク全体の価値があなたへ自動分配される。"
+        "STREAM_ACTIVE: Real-time micro-payments executing at sub-satoshi granularity per model inference cycle.",
+        "RESOURCE_MESH: Autonomous agents dynamically renting compute, RAM, and bandwidth via direct script channels.",
+        "SWARM_YIELD: Algorithmic distribution of network utility dividends directly to participating edge nodes."
     ];
 
     function switchTab(index) {
@@ -329,7 +253,6 @@
         document.getElementById('tabContent').innerText = tabContents[index];
     }
 
-    // スワイプ機能の実装
     const container = document.getElementById('swipeContainer');
     const btn = document.getElementById('swipeBtn');
     const text = document.getElementById('swipeText');
@@ -374,11 +297,10 @@
     function triggerComplete() {
         isDragging = false;
         container.classList.add('completed');
-        text.innerText = "✓ VALUE TELEPORTED";
-        balanceText.innerText = "62,950,000 SAT";
+        text.innerText = ">> MESH SYNCHRONIZED SUCCESSFULLY";
+        balanceText.innerText = "1,295,000,000 SAT";
     }
 
-    // イベントリスナー登録
     btn.addEventListener('mousedown', startDrag);
     window.addEventListener('mousemove', onDrag);
     window.addEventListener('mouseup', stopDrag);
@@ -390,3 +312,4 @@
 
 </body>
 </html>
+
