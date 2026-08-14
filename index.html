@@ -130,38 +130,44 @@ div, .card {
         height: auto !important;
     }
 }
-/* スマホ画面内に完全縦1列で収めるための決定版 */
-* {
+/* --- レイアウトの完全リセット＆スマホ最適化 --- */
+*, *::before, *::after {
     box-sizing: border-box !important;
+    max-width: 100% !important;
 }
 
-body, html, .container {
+html, body {
     width: 100% !important;
     max-width: 100vw !important;
     overflow-x: hidden !important;
     margin: 0 !important;
+    padding: 0 !important;
 }
 
-/* すべてのGrid / Flexレイアウトを1列（縦並び）に強制変更 */
-div, section, article, main {
-    grid-template-columns: 1fr !important;
-    flex-direction: column !important;
+/* 右側にへばりつく要素や2列化を強制的に解除 */
+div, section, article, main, aside {
+    display: block !important;
+    float: none !important;
+    position: static !important;
     width: 100% !important;
-    max-width: 100% !important;
     min-width: 0 !important;
-}
-
-/* カード類をすべて幅100%にして余計なマージンをカット */
-.card, div[class*="card"], div[class*="-node"], div[class*="-box"] {
-    width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    left: auto !important;
+    right: auto !important;
 }
 
-/* 長いコードや英数字の折り返し */
-* {
+/* カードを画面いっぱいに広げる */
+.card, [class*="card"] {
+    width: 100% !important;
+    margin-bottom: 15px !important;
+}
+
+/* テキストの折り返し処理 */
+p, span, div, pre, code {
     word-break: break-all !important;
     overflow-wrap: anywhere !important;
+    white-space: pre-wrap !important;
 }
       
 </style>
