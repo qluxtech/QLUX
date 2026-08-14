@@ -47,8 +47,9 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; -webkit-tap-highlight-color: transparent; }
         body { background-color: var(--bg-color); color: var(--text-main); padding: 12px; line-height: 1.4; font-size: 12px; }
-        .container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
         
+        .container { width: 100%; max-width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+
         .card { background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 14px; position: relative; }
         .card::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent-cyan); opacity: 0.9; }
         
