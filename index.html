@@ -130,44 +130,39 @@ div, .card {
         height: auto !important;
     }
 }
-/* --- レイアウトの完全リセット＆スマホ最適化 --- */
-*, *::before, *::after {
+/* --- レイアウトとカード内ボックスの最適化 --- */
+* {
     box-sizing: border-box !important;
-    max-width: 100% !important;
 }
 
-html, body {
+body, html, .container {
     width: 100% !important;
     max-width: 100vw !important;
     overflow-x: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    padding: 4px !important;
 }
 
-/* 右側にへばりつく要素や2列化を強制的に解除 */
-div, section, article, main, aside {
-    display: block !important;
-    float: none !important;
-    position: static !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    left: auto !important;
-    right: auto !important;
-}
-
-/* カードを画面いっぱいに広げる */
+/* 親枠（外側のコンテナ）を横幅100%にして1列にする */
 .card, [class*="card"] {
     width: 100% !important;
-    margin-bottom: 15px !important;
+    padding: 8px !important;
+    margin-bottom: 10px !important;
 }
 
-/* テキストの折り返し処理 */
-p, span, div, pre, code {
+/* カード内部の数値ボックス（402.6 kWなど）は小さく横並びを維持 */
+div[style*="display: flex"], div[style*="flex"], .header-flex {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    gap: 6px !important;
+}
+
+/* 各ボックス内の文字や高さをコンパクトに調整 */
+div, p, span, pre {
+    height: auto !important;
+    min-height: 0 !important;
     word-break: break-all !important;
-    overflow-wrap: anywhere !important;
-    white-space: pre-wrap !important;
 }
       
 </style>
