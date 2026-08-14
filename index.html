@@ -130,32 +130,35 @@ div, .card {
         height: auto !important;
     }
 }
-/* 固定幅(95vw)を解除し、すべてスマホ画面幅に綺麗に収める */
-div, .card, .dominant-node, .hyper-card, .m2m-card, .solver-card, .zk-card, .iot-card, .metric-box, .container {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+/* スマホ画面内に完全縦1列で収めるための決定版 */
+* {
     box-sizing: border-box !important;
 }
 
-/* 全ての要素の高さ制限解除 */
-*, div, section, article, .container, .card {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-    flex-shrink: 0 !important;
+body, html, .container {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    margin: 0 !important;
 }
 
-/* 2列レイアウトを縦1列化 */
-div[style*="display: flex"], div[style*="display: grid"], div[style*="flex"], div[style*="grid"] {
-    display: flex !important;
+/* すべてのGrid / Flexレイアウトを1列（縦並び）に強制変更 */
+div, section, article, main {
+    grid-template-columns: 1fr !important;
     flex-direction: column !important;
     width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
 }
 
-/* 文字のはみ出し防止 */
+/* カード類をすべて幅100%にして余計なマージンをカット */
+.card, div[class*="card"], div[class*="-node"], div[class*="-box"] {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* 長いコードや英数字の折り返し */
 * {
     word-break: break-all !important;
     overflow-wrap: anywhere !important;
