@@ -139,11 +139,32 @@ div, .card, .dominant-node, .hyper-card, .m2m-card, .solver-card, .zk-card, .iot
     overflow-x: hidden !important;
     box-sizing: border-box !important;
 }
+    /* スマホ・PC共通：すべてのカードを綺麗に1列に収める最終調整 */
 *, div, section, article, .container, .card {
     height: auto !important;
     max-height: none !important;
     overflow: visible !important;
     flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* 画面幅に収め、文字のはみ出しと横スクロールを防ぐ */
+body, .container {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+}
+
+div, p, span, pre, code {
+    word-break: break-word !important;
+    white-space: pre-wrap !important;
+}
+
+/* 2列レイアウトをスマホ用に1列化 */
+[style*="grid"], [style*="flex"] {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
 }
 </style>
 </head>
