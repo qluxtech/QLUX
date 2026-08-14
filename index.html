@@ -130,42 +130,37 @@ div, .card {
         height: auto !important;
     }
 }
- /* 強制適用 */
-div, .card, .dominant-node, .hyper-card, .m2m-card, .solver-card, .zk-card, .iot-card, .metric-box {
-    width: 95vw !important;
-    max-width: 95vw !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    overflow-x: hidden !important;
+/* 固定幅(95vw)を解除し、すべてスマホ画面幅に綺麗に収める */
+div, .card, .dominant-node, .hyper-card, .m2m-card, .solver-card, .zk-card, .iot-card, .metric-box, .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     box-sizing: border-box !important;
 }
-    /* スマホ・PC共通：すべてのカードを綺麗に1列に収める最終調整 */
+
+/* 全ての要素の高さ制限解除 */
 *, div, section, article, .container, .card {
     height: auto !important;
     max-height: none !important;
     overflow: visible !important;
     flex-shrink: 0 !important;
-    box-sizing: border-box !important;
 }
 
-/* 画面幅に収め、文字のはみ出しと横スクロールを防ぐ */
-body, .container {
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
-}
-
-div, p, span, pre, code {
-    word-break: break-word !important;
-    white-space: pre-wrap !important;
-}
-
-/* 2列レイアウトをスマホ用に1列化 */
-[style*="grid"], [style*="flex"] {
+/* 2列レイアウトを縦1列化 */
+div[style*="display: flex"], div[style*="display: grid"], div[style*="flex"], div[style*="grid"] {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
 }
+
+/* 文字のはみ出し防止 */
+* {
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+}
+      
 </style>
 </head>
 <body>
