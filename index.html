@@ -98,7 +98,26 @@
 
         .evolution-stream { display: flex; flex-direction: column; gap: 4px; height: 110px; overflow-y: hidden; position: relative; }
         .evo-row { display: grid; grid-template-columns: 80px 1fr 70px; gap: 6px; background: #010204; border: 1px solid var(--border-color); padding: 5px 6px; font-size: 0.62rem; align-items: center; }
-    </style>
+  /* スマホ画面での表示崩れ・はみ出し防止 */
+@media (max-width: 768px) {
+    body {
+        padding: 5px !important;
+    }
+    .card, .dominant-node, .hyper-card, .m2m-card, .solver-card, .zk-card, .iot-card {
+        padding: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    div[style*="display: flex"], div[style*="display: grid"] {
+        flex-wrap: wrap !important;
+        grid-template-columns: 1fr !important;
+    }
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
+}
+ </style>
 </head>
 <body>
 
